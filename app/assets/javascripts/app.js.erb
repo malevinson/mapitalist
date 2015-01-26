@@ -22,8 +22,8 @@ function initialize() {
 
   // When the user clicks, open an infowindow
   map.data.addListener('click', function(event) {
-    var myHTML = event.feature.getProperty("name");
-    console.log(myHTML);
+    var name = event.feature.getProperty("name");
+    $('#country-name').html(name);
   });  
 
   map.data.addListener('mouseover', function(event) {
