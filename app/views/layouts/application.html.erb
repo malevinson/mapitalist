@@ -9,12 +9,13 @@
 </head>
 <body>
 
-	<%= render 'layouts/header' %>
+	<%#= render 'layouts/header' %>
 
 	<main>
 		<%= yield %>
 	</main>
 
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
 	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 </body>

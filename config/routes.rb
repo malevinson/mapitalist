@@ -1,9 +1,14 @@
 Rails.application.routes.draw do
 
+  get 'maps/countries'
+
+  get 'home/show'
+
   devise_for :users, controllers: {registrations: 'users/registrations'}
   
-  resources :users, only: [:index] do
-  end
+  resources :users, only: [:index]
+
+  root 'home#show'
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
