@@ -171,6 +171,7 @@ DEPENDENCIES
   faker
   figaro
   jbuilder (~> 2.0)
+  json
   normalize-rails
   pg
   rails (= 4.2.0)

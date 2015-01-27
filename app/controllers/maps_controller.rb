@@ -4,4 +4,15 @@ class MapsController < ApplicationController
   	      :content_type => 'application/json',
   	      :layout => false
   end
+
+  def update
+  	json = params.to_json
+  	puts json
+  end
+
+ 	private
+ 	
+ 	def update_params
+
+ 	end
 end

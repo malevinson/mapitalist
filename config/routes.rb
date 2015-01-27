@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   get 'home/show'
 
+  post 'maps/update'
+
   devise_for :users, controllers: {registrations: 'users/registrations'}
   
   resources :users, only: [:index]
