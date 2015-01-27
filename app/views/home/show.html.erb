@@ -2,7 +2,7 @@
 
 <div id="sidebar-left">
 <h2 id="country-name">United States</h2>
-	<table>
+	<!-- <table>
 		<tbody>
 			<tr><td>Ask:</td><td class="ask right">106.33</td></tr>
 			<tr><td>Bid:</td><td class="bid right">106.20</td></tr>
@@ -11,5 +11,11 @@
 			<tr><td>Daily Change:</td><td class="daily-change right">1.02</td></tr>
 			<tr><td>Volume:</td><td class="volume right">4106519</td></tr>
 		</tbody>
-	</table>
+	</table> -->
 </div>
+
+<%= javascript_include_tag 'map' %>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?"> </script>
+<script type="text/javascript">
+	google.maps.event.addDomListener(window, 'load', initialize);
+</script>

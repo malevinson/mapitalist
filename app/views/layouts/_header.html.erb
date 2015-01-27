@@ -1,5 +1,5 @@
 <header>
-	<a id="logo" href="/">Project 2</a>
+	<%= link_to "Project 2", root_path, id: "logo", "data-no-turbolink" => true %>
 	<nav>
 		<!-- buttons change if logged in -->
 		<%if user_signed_in? %>
