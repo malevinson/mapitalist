@@ -8,6 +8,7 @@ class MapsController < ApplicationController
   def update
   	json = params.to_json
   	puts json
+    render :nothing => true
   end
 
  	private
