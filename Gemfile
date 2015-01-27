@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 gem 'normalize-rails'
 gem 'figaro'
 
+gem 'json'
+
 gem 'devise'
 gem 'faker'
 
