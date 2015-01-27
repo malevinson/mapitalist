@@ -57,62 +57,69 @@ var encodedURI = 'https://query.yahooapis.com/v1/public/yql?q=' + encodedQuery;
     {url: encodedURI,
     success: function(response){
 
-      var results = response.query.results.quote;
+      console.log(response);
 
-      var min = Number.POSITIVE_INFINITY;
-      var max = Number.NEGATIVE_INFINITY;
+      var countries = transformResponse(response);
 
-      var countries = [];
-        
-            // for loop that appends a row of data for each country to the table
-            // iterates through each of the stock objects received from the ajax call
-           for (var i = 0; i < results.length; i++ ){
+      $.ajax({
+       url: "maps/update",
+       type: "POST",
+       data: countries
+      });
 
-              var ask = results[i].Ask;
-              var countryName = lookup[results[i].Symbol];
-              var symbol = results[i].Symbol;
-              var bid = results[i].Bid;
-              var price = ((parseInt(ask) + parseInt(bid))/2).toString();
-              var open = results[i].Open;
-              var dailyChange = (parseFloat(price) / parseFloat(open)).toString();
-              var volume = results[i].Volume;
-
-              min = dailyChange < min ? dailyChange : min;
-              max = dailyChange > max ? dailyChange : max;
-
-              var country = {};
-              country["visible"] = true;
-              country["symbol"] = symbol;
-              country["name"] = countryName;
-              country["dailyChange"] = dailyChange;
-
-              countries.push(country);
-          }
-          
-
-          var b = 1, a = -1;
-          countryAlphas = {};
-
-          _.each(countries, function(country){
-            var alpha = ((b - a) * (parseFloat(country.dailyChange) - min))/(max - min) + a;
-            var alphaString = alpha.toString();
-            country["alpha"] = alphaString;
-          });
-
-          console.log(countries);
-         
-
-         $.ajax({
-          url: "maps/update",
-          type: "POST",
-          data: countryAlphas
-         })
      },
     error: function(){
     console.log("error"); 
     }
+  });
 
-       });
+function transformResponse(response){
+  var results = response.query.results.quote;
+
+  var min = Number.POSITIVE_INFINITY;
+  var max = Number.NEGATIVE_INFINITY;
+
+  var countries = [];
+    
+        // for loop that appends a row of data for each country to the table
+        // iterates through each of the stock objects received from the ajax call
+       for (var i = 0; i < results.length; i++ ){
+
+          var ask = results[i].Ask;
+          var countryName = lookup[results[i].Symbol];
+          var bid = results[i].Bid;
+          var price = ((parseInt(ask) + parseInt(bid))/2).toString();
+          var open = results[i].Open;
+          var dailyChange = (parseFloat(price) / parseFloat(open)).toString();
+
+          min = dailyChange < min ? dailyChange : min;
+          max = dailyChange > max ? dailyChange : max;
+
+          var country = {};
+          country["visible"] = true;
+          country["volume"] = results[i].Volume;
+          country["name"] = countryName;
+          country["dailyChange"] = dailyChange;
+          country["lastTradeDate"] = results[i].LastTradeDate;
+          country["lastTradeTime"] = results[i].LastTradeTime;
+          country["symbol"] = results[i].Symbol;
+
+          countries.push(country);
+      }
+      
+
+      var b = 1, a = -1;
+      countryAlphas = {};
+
+      _.each(countries, function(country){
+        var alpha = ((b - a) * (parseFloat(country.dailyChange) - min))/(max - min) + a;
+        var alphaString = alpha.toString();
+        country["alpha"] = alphaString;
+      });
+
+      return countries;
+}
+
 
 // needs As a FE developer, I need a javascript function that takes a country name as a parameter and returns a json object with its performance (raw and scaled) and all the stock symbols that make up its score.
 
