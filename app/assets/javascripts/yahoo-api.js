@@ -43,24 +43,33 @@ var lookup = {
 };
 
 
-var countriesDailyChange = {};
 var countryNameAndPerformance = {};
+
+var query = 'select * from yahoo.finance.quotes where symbol in ("VTI","EWA","EWC","EWD","EWG","EWH","EWI","EWJ","EWK","EWL","EWM","EWN","EWO","EWP","EWQ","EWS","EWU","EWW","EWT","EWY","EWZ","EZA")&format=json&diagnostics=true&env=http://datatables.org/alltables.env&callback=';
+
+var encodedQuery = encodeURI(query);
+
+var encodedURI = 'https://query.yahooapis.com/v1/public/yql?q=' + encodedQuery;
 
 
   // call to Yahoo API requesting stock information for 22 hard coded symbols
   $.ajax(
-    {url: "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22VTI%22%2C%22EWA%22%2C%22EWC%22%2C%22EWD%22%2C%22EWG%22%2C%22EWH%22%2C%22EWI%22%2C%22EWJ%22%2C%22EWK%22%2C%22EWL%22%2C%22EWM%22%2C%22EWN%22%2C%22EWO%22%2C%22EWP%22%2C%22EWQ%22%2C%22EWS%22%2C%22EWU%22%2C%22EWW%22%2C%22EWT%22%2C%22EWY%22%2C%22EWZ%22%2C%22EZA%22)%0A%09%09&format=json&diagnostics=true&env=http%3A%2F%2Fdatatables.org%2Falltables.env&callback=",
+    {url: encodedURI,
     success: function(response){
 
-      // stock objects 
       var results = response.query.results.quote;
+
+      var min = Number.POSITIVE_INFINITY;
+      var max = Number.NEGATIVE_INFINITY;
+
+      var countries = [];
         
             // for loop that appends a row of data for each country to the table
             // iterates through each of the stock objects received from the ajax call
            for (var i = 0; i < results.length; i++ ){
 
               var ask = results[i].Ask;
-              var country = lookup[results[i].Symbol];
+              var countryName = lookup[results[i].Symbol];
               var symbol = results[i].Symbol;
               var bid = results[i].Bid;
               var price = ((parseInt(ask) + parseInt(bid))/2).toString();
@@ -68,45 +77,37 @@ var countryNameAndPerformance = {};
               var dailyChange = (parseFloat(price) / parseFloat(open)).toString();
               var volume = results[i].Volume;
 
-              // adds each symbol : change pair to the countriesDailyChange object
-              countriesDailyChange[symbol] = dailyChange;
+              min = dailyChange < min ? dailyChange : min;
+              max = dailyChange > max ? dailyChange : max;
 
-              // adds country name : performance info pair to the countryNameAndPerformance object
-              countryNameAndPerformance[country] = dailyChange;
+              var country = {};
+              country["visible"] = true;
+              country["symbol"] = symbol;
+              country["name"] = countryName;
+              country["dailyChange"] = dailyChange;
 
-              var trOpen = $("<tr>");
-              var countryCol = $("<td></td>").html(country);
-              var askCol = $("<td></td>").html(ask);
-              var bidCol = $("<td></td>").html(bid);
-              var priceCol = $("<td></td>").html(price);
-              var openCol = $("<td></td>").html(open);
-              var dailyChangeCol = $("<td></td>").html(dailyChange);
-              var volumeCol = $("<td></td>").html(volume);
-              var trClose = $("</tr>");
-
-              $("table tbody").append(trOpen, countryCol, askCol, bidCol, priceCol, openCol, dailyChangeCol, volumeCol, trClose);
-            }
-
-          // gets the max and min Daily Change values
-          // var lowest = _.min(obj, function(o){return o.symbol;});
-          var min = _.min(countriesDailyChange, function(o){return o;});
-          var max = _.max(countriesDailyChange, function(o){return o;});
+              countries.push(country);
+          }
+          
 
           var b = 1, a = -1;
           countryAlphas = {};
 
-          // scale the values
-          // output a hash of {SYM: scaled_change (from 1 to -1)}
-          for (var j in countriesDailyChange){
-            if (countriesDailyChange.hasOwnProperty(j)){  
-                  var alpha = ((b - a) * (parseFloat(countriesDailyChange[j]) - min))/(max - min) + a;
-                  var alphaString = alpha.toString();
-                  countryAlphas[j] = alphaString;
-                }
-              } 
-              console.log(countryAlphas);
-         },
+          _.each(countries, function(country){
+            var alpha = ((b - a) * (parseFloat(country.dailyChange) - min))/(max - min) + a;
+            var alphaString = alpha.toString();
+            country["alpha"] = alphaString;
+          });
 
+          console.log(countries);
+         
+
+         $.ajax({
+          url: "maps/update",
+          type: "POST",
+          data: countryAlphas
+         })
+     },
     error: function(){
     console.log("error"); 
     }
