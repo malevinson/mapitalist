@@ -11,7 +11,8 @@ function initialize() {
 
   map.data.setStyle(function(feature) {
     return ({
-      fillColor: feature.getProperty("color"),
+      fillColor: "black",
+      visible: feature.getProperty("visible"),
       strokeColor: "black",
       strokeWeight: 1
     });
@@ -20,7 +21,7 @@ function initialize() {
   // Global infowindow
   var infowindow = new google.maps.InfoWindow();
 
-  // When the user clicks, open an infowindow
+  // When the user clicks
   map.data.addListener('click', function(event) {
     var name = event.feature.getProperty("name");
     $('#country-name').html(name);
