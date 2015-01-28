@@ -50,26 +50,30 @@ function updateGeoJSONData(){
 
 	var encodedURI = 'https://query.yahooapis.com/v1/public/yql?q=' + encodedQuery;
 
-	// call to Yahoo API requesting stock information for 22 hard coded symbols
+	// call to Yahoo API requesting stock information for lookup list
 	$.ajax(
 		{url: encodedURI,
 		success: function(response){
-
-			var countries = transformResponse(response);
 			console.log("Fetched new price data from Yahoo", response);
 
-			$.ajax({
-			 url: "maps/update",
-			 type: "POST",
-			 data: {countries: countries},
-			 success: function(){
-			 	console.log("Updated server with latest price data", countries);
-			 }
-			});
+			var countries = transformResponse(response);
+			
+			if (countries != false) {
+				$.ajax({
+				 url: "maps/update",
+				 type: "POST",
+				 data: {countries: countries},
+				 success: function(){
+				 	console.log("Updated server with latest price data", countries);
+				 }
+				});
+			} else {
+				console.log("Skipping Post", "(Bad response from Yahoo or the markets aren't open)");
+			}
 
 		 },
 		error: function(){
-		console.log("error"); 
+		console.log("Error fetching price data from Yahoo"); 
 		}
 	});
 
@@ -90,6 +94,11 @@ function updateGeoJSONData(){
 			var open = result.Open;
 			var dailyChange = (parseFloat(price) / parseFloat(open)).toString();
 
+			if ( isNaN(ask) || isNaN(bid) || isNaN(price) || isNaN(open) || isNaN(dailyChange) ) {
+				// Bad response from Yahoo or the markets aren't open
+				return false
+			}
+
 			min = dailyChange < min ? dailyChange : min;
 			max = dailyChange > max ? dailyChange : max;
 
@@ -102,13 +111,10 @@ function updateGeoJSONData(){
 			country["lastTradeTime"] = result.LastTradeTime;
 			country["symbol"] = result.Symbol;
 
-			// console.log(country);
-
 			countries.push(country);
 		});
 			
 		var b = 1, a = -1;
-		countryAlphas = {};
 
 		_.each(countries, function(country){
 			var alpha = ((b - a) * (parseFloat(country.dailyChange) - min))/(max - min) + a;
