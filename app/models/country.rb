@@ -9,22 +9,27 @@ class Country < ActiveRecord::Base
     countries = params[:countries]
 
     # iterate over every country in params
-    countries.each do |k, v|
-	    country = Country.find_by(name: v[:name])
+    countries.each do |k, countryParams|
+	    country = Country.find_by(name: countryParams[:name])
 
 	    new_feature = { 
 				type: "Feature", 
 				properties: 
 					{ 
 						visible: true,
-						volume: v[:volume],
-						name: v[:name],
-						dailyChange: v[:dailyChange],
-						lastTradeDate: v[:lastTradeDate],
-						lastTradeTime: v[:lastTradeTime],
-						symbol: v[:symbol],
-						alpha: v[:alpha],
-						color: v[:color]
+						volume: countryParams[:volume],
+						name: countryParams[:name],
+						dailyChange: countryParams[:dailyChange],
+						lastTradeDate: countryParams[:lastTradeDate],
+						lastTradeTime: countryParams[:lastTradeTime],
+						symbol: countryParams[:symbol],
+						alpha: countryParams[:alpha],
+						color: countryParams[:color],
+						fullName: countryParams[:fullName],
+						yearHigh: countryParams[:yearHigh],
+						yearLow: countryParams[:yearLow],
+						dayHigh: countryParams[:dayHigh],
+						dayLow: countryParams[:dayLow]
 					}, 
 				geometry: 
 					{ type: country.poly_type, coordinates: eval(country.coordinates) }

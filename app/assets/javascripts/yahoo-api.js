@@ -125,6 +125,12 @@ function updateGeoJSONData(){
 			country.lastTradeTime = result.LastTradeTime;
 			country.symbol = result.Symbol;
 
+			country.fullName = result.Name;
+			country.yearHigh = result.YearHigh;
+			country.yearLow = result.YearLow;
+			country.dayHigh = result.DaysHigh;
+			country.dayLow = result.DaysLow;
+
 			countries.push(country);
 		});
 			
