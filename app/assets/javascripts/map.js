@@ -49,6 +49,7 @@ function initialize() {
     var name = event.feature.getProperty("name");
     $('#title').html(name);
     $('#tabs .country').addClass('selected');
+    invertSelected();
     $("#sidebar-left").animate({"margin-left": '0'});
   });  
 
