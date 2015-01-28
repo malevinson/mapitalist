@@ -111,7 +111,7 @@ function updateGeoJSONData(){
 			}
 
 			// uncomment for demo mode
-			dailyChange = randomIntFromInterval(80,120) / 100;
+			// dailyChange = randomIntFromInterval(80,120) / 100;
 
 			min = dailyChange < min ? dailyChange : min;
 			max = dailyChange > max ? dailyChange : max;

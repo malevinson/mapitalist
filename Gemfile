@@ -4,6 +4,7 @@ gem 'normalize-rails'
 # gem 'figaro'
 
 gem 'json'
+gem 'font-awesome-rails'
 
 gem 'devise'
 gem 'faker'

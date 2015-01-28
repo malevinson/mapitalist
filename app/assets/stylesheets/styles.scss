@@ -1,0 +1,27 @@
+html,
+body,
+main,
+#map-canvas {
+  height: 100%;
+  margin: 0px;
+  padding: 0px
+}
+
+#sidebar-left>.close {
+	display: table;
+	position: absolute;
+	cursor: pointer;
+	top: 10px;
+	right: 10px;
+	width: 25px;
+	height: 25px;
+	vertical-align: middle;
+	text-align: center;
+	background-color: #FB2A3C;
+	color: #fcfcfc;
+
+	.fa {
+		display: table-cell;
+		vertical-align: middle;
+	}
+}

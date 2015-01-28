@@ -1,0 +1,5 @@
+$("#sidebar-left").append($("<div></div>").addClass('close').html('<i class="fa fa-times"></i>'));
+
+$("#sidebar-left>.close").on("click", function(){
+	$("#sidebar-left").hide();
+});

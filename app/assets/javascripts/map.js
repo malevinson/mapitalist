@@ -48,6 +48,7 @@ function initialize() {
     console.log(properties);
     var name = event.feature.getProperty("name");
     $('#country-name').html(name);
+    $("#sidebar-left").show();
   });  
 
   map.data.addListener('mouseover', function(event) {
