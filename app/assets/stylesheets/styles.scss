@@ -77,7 +77,6 @@ header {
 			padding: 10px;
 			width: 100%;
 			text-align: center;
-			background-color: $tab-bg-color;
 		}
 
 		&.country, &.chatter, &.stocks, &.user {
@@ -85,20 +84,43 @@ header {
 		}
 		
 		&.tab.country {
-			color: #FD9326;
+			$country-fg-color: #FD9326;
+			color: $country-fg-color;
+			background-color: $tab-bg-color;
+			&.selected {
+				color: $tab-bg-color;
+				background-color: $country-fg-color;
+			}
 		}
 
 		&.tab.chatter {
-			color: #2780EF;
+			$chatter-fg-color: #2780EF;
+			color: $chatter-fg-color;
+			background-color: $tab-bg-color;
+			&.selected {
+				color: $tab-bg-color;
+				background-color: $chatter-fg-color;
+			}
 		}
 
 		&.tab.stocks {
-			color: #5EBF60;
+			$stocks-fg-color: #5EBF60;
+			color: $stocks-fg-color;
+			background-color: $tab-bg-color;
+			&.selected {
+				color: $tab-bg-color;
+				background-color: $stocks-fg-color;
+			}
 		}
 
-
 		&.tab.user {
-			color: #FB2A3C;
+			$user-fg-color: #FB2A3C;
+			color: $user-fg-color;
+			background-color: $tab-bg-color;
+			&.selected {
+				color: $tab-bg-color;
+				background-color: $user-fg-color;
+			}
 		}
 
 	}
