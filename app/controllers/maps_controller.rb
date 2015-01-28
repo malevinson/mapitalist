@@ -6,48 +6,13 @@ class MapsController < ApplicationController
   end
 
   def update
-  	# Receive params of data to update our countries.json
-    
-    feature_collection = {
-    	type: "FeatureCollection",
-    	features: []
-    }
+    geoJSON = Country.buildJSON(params)
 
-    countries = params[:countries]
-
-    # iterate over every country in params
-    countries.each do |k, v|
-	    country = Country.find_by(name: v[:name])
-
-	    new_feature = { 
-				type: "Feature", 
-				properties: 
-					{ 
-						visible: true,
-						volume: v[:volume],
-						name: v[:name],
-						dailyChange: v[:dailyChange],
-						lastTradeDate: v[:lastTradeDate],
-						lastTradeTime: v[:lastTradeTime],
-						symbol: v[:symbol],
-						alpha: v[:alpha],
-						color: v[:color]
-					}, 
-				geometry: 
-					{ type: country.poly_type, coordinates: eval(country.coordinates) }
-			}
-
-    	feature_collection[:features] << new_feature
-    end
-
-    geoJSON = feature_collection.to_json
-
-    puts "Updating countries.json"
   	File.open("#{Rails.root}/public/assets/javascripts/countries.json","w") do |f|
 		  f.write(geoJSON)
 		end
-
     render json: geoJSON
+    puts "Updated countries.json"
   end
 
  	private
