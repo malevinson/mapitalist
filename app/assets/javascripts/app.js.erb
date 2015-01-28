@@ -7,26 +7,23 @@ $("#tabs").append($("<li></li>").addClass('tab user').html('<i class="fa fa-user
 // sidebar toggling
 
 $("#sidebar-left>.close").on("click", function(){
+	invertSelected();
 	$(".tab").removeClass("selected")
 	$("#sidebar-left").animate({"margin-left": '-=500'})
 });
 
 $(".tab").on("click", function(){
+	var icon = $(".fa", this);
 	if ($(this).hasClass("selected")){
 		// slide off screen
-		$(".fa", this).css({'color': $(".fa", this).css('background-color'), 'background-color': $(".fa", this).css('color')});
+		icon.css({'color': icon.css('background-color'), 'background-color': icon.css('color')});
 		$(".selected").removeClass("selected");
 		$("#sidebar-left").animate({"margin-left": '-=500'})
 	} else {
-		$(".selected .fa").each(function(){
+		
+		invertSelected();
 
-			var color = $(this).css('color');
-			var bgColor = $(this).css('background-color');
-
-			$(this).css({'color': bgColor, 'background-color': color })
-		});
-
-		$(".fa", this).css({'color': $(".fa", this).css('background-color'), 'background-color': $(".fa", this).css('color')});
+		icon.css({'color': icon.css('background-color'), 'background-color': icon.css('color')});
 
 		// slide on screen or change tabs
 		$(".selected").removeClass("selected");
@@ -35,13 +32,14 @@ $(".tab").on("click", function(){
 	}
 });
 
+function invertSelected(){
+	$(".selected .fa").each(function(){
+
+		var color = $(this).css('color');
+		var bgColor = $(this).css('background-color');
+
+		$(this).css({'color': bgColor, 'background-color': color })
+	});
+}
+
 // <- sidebar toggling
-
-// button styling on toggle
-// $(".tab .fa").on("click", function(){
-
-// 	// revert all selected styles
-	
-
-
-// });
