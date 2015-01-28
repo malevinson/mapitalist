@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'normalize-rails'
-gem 'figaro'
+# gem 'figaro'
 
 gem 'json'
 
