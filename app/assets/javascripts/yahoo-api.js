@@ -105,32 +105,36 @@ function updateGeoJSONData(){
 			var dailyChange = (parseFloat(price) / parseFloat(open)).toString();
 
 			if ( isNaN(ask) || isNaN(bid) || isNaN(price) || isNaN(open) || isNaN(dailyChange) ) {
-				// Bad response from Yahoo or the markets aren't open
+				// Bad response from Yahoo or the markets aren't open 
+				// (skip this country)
 				return false
 			}
+
+			// uncomment for demo mode
+			dailyChange = randomIntFromInterval(80,120) / 100;
 
 			min = dailyChange < min ? dailyChange : min;
 			max = dailyChange > max ? dailyChange : max;
 
 			var country = {};
-			country["visible"] = true;
-			country["volume"] = result.Volume;
-			country["name"] = countryName;
-			country["dailyChange"] = dailyChange;
-			country["lastTradeDate"] = result.LastTradeDate;
-			country["lastTradeTime"] = result.LastTradeTime;
-			country["symbol"] = result.Symbol;
+			country.visible = true;
+			country.volume = result.Volume;
+			country.name = countryName;
+			country.dailyChange = dailyChange;
+			country.lastTradeDate = result.LastTradeDate;
+			country.lastTradeTime = result.LastTradeTime;
+			country.symbol = result.Symbol;
 
 			countries.push(country);
 		});
 			
-		var b = 1, a = -1;
+		var b = 1, a = 0;
 
 		_.each(countries, function(country){
-			var alpha = ((b - a) * (parseFloat(country.dailyChange) - min))/(max - min) + a;
-			var alphaString = alpha.toString();
-			country["alpha"] = alphaString;
-			country["color"] = numToColorGradient(alpha);
+			var dailyChange = parseFloat(country.dailyChange);
+			var alpha = ((b - a) * dailyChange - min)/(max - min) + a;
+			country.alpha = alpha.toString();
+			country.color = numToColorGradient(dailyChange, alpha);
 		});
 
 		return countries;

@@ -52,7 +52,7 @@ function initialize() {
 
   map.data.addListener('mouseover', function(event) {
     map.data.revertStyle();
-    map.data.overrideStyle(event.feature, {fillColor: "blue", strokeWeight: 2});
+    map.data.overrideStyle(event.feature, {fillOpacity: 0.5});
   });
 
   map.data.addListener('mouseout', function(event) {
