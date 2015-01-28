@@ -12,6 +12,7 @@ function initialize() {
   map.data.setStyle(function(feature) {
     return ({
       fillColor: feature.getProperty("color"),
+      fillOpacity: 0.8,
       visible: feature.getProperty("visible"),
       strokeColor: "black",
       strokeWeight: 1
