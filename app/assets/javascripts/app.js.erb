@@ -1,4 +1,9 @@
 $("#sidebar-left").append($("<div></div>").addClass('close').html('<i class="fa fa-times"></i>'));
+$("#sidebar-left #tabs").append($("<li></li>").addClass('chatter').html('<i class="fa fa-flag"></i>'));
+$("#sidebar-left #tabs").append($("<li></li>").addClass('chatter').html('<i class="fa fa-comments"></i>'));
+$("#sidebar-left #tabs").append($("<li></li>").addClass('chatter').html('<i class="fa fa-line-chart"></i>'));
+$("#sidebar-left #tabs").append($("<li></li>").addClass('chatter').html('<i class="fa fa-user"></i>'));
+
 
 $("#sidebar-left>.close").on("click", function(){
 	$("#sidebar-left").hide();
