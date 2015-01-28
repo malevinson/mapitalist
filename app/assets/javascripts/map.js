@@ -7,7 +7,7 @@ var mapStyle = [{
 }, {
   'featureType': 'landscape',
   'elementType': 'geometry',
-  'stylers': [{'visibility': 'on'}, {'color': '#fcfcfc'}]
+  'stylers': [{'visibility': 'on'}, {'color': '#dddddd'}]
 }, {
   'featureType': 'water',
   'elementType': 'labels',
@@ -15,7 +15,7 @@ var mapStyle = [{
 }, {
   'featureType': 'water',
   'elementType': 'geometry',
-  'stylers': [{'visibility': 'on'}, {'color': '#000000'}]
+  'stylers': [{'visibility': 'on'}, {'color': '#2C2040'}]
 }];
 
 function initialize() {

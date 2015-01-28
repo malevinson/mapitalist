@@ -1,9 +1,27 @@
 $("#sidebar-left").append($("<div></div>").addClass('close').html('<i class="fa fa-times"></i>'));
-$("#sidebar-left #tabs").append($("<li></li>").addClass('country').html('<i class="fa fa-flag"></i>'));
-$("#sidebar-left #tabs").append($("<li></li>").addClass('chatter').html('<i class="fa fa-comments"></i>'));
-$("#sidebar-left #tabs").append($("<li></li>").addClass('stocks').html('<i class="fa fa-line-chart"></i>'));
-$("#sidebar-left #tabs").append($("<li></li>").addClass('user').html('<i class="fa fa-user"></i>'));
+$("#tabs").append($("<li></li>").addClass('tab country').html('<i class="fa fa-flag"></i>'));
+$("#tabs").append($("<li></li>").addClass('tab chatter').html('<i class="fa fa-comments"></i>'));
+$("#tabs").append($("<li></li>").addClass('tab stocks').html('<i class="fa fa-line-chart"></i>'));
+$("#tabs").append($("<li></li>").addClass('tab user').html('<i class="fa fa-user"></i>'));
+
+// sidebar toggling
 
 $("#sidebar-left>.close").on("click", function(){
-	$("#sidebar-left").hide();
+	$(".tab").removeClass("selected")
+	$("#sidebar-left").animate({"margin-left": '-=500'})
 });
+
+$(".tab").on("click", function(){
+	if ($(this).hasClass("selected")){
+		// slide off screen
+		$(".selected").removeClass("selected");
+		$("#sidebar-left").animate({"margin-left": '-=500'})
+	} else {
+		// slide on screen or change tabs
+		$(".selected").removeClass("selected");
+		$(this).addClass("selected");
+		$("#sidebar-left").animate({"margin-left": '0'})
+	}
+});
+
+// <- sidebar toggling

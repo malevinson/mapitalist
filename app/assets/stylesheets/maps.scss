@@ -3,6 +3,8 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 $header-height: 40px;
+$sidebar-width: 450px;
+$sidebar-tabs-width: 80px;
 
 * {
 	box-sizing: border-box;
@@ -26,59 +28,69 @@ header {
 	}
 }
 
+#tabs {
+	position: absolute;
+	top: $header-height;
+	width: $sidebar-tabs-width;
+	z-index: 2;
+
+	display: inline-block;
+	margin: 0;
+	height: 100%;
+	list-style: none;
+	padding: 0;
+	background-color: rgba(20,20,20,1);
+
+	li {
+		font-size: 40px;
+		color: #fcfcfc;
+
+		.fa {
+			padding: 10px;
+			width: 100%;
+			text-align: center;
+		}
+
+		&.country, &.chatter, &.stocks, &.user {
+			cursor: pointer;
+		}
+
+		.fa-comments {
+			background: #2780EF;
+		}
+
+		.fa-line-chart {
+			background: #5EBF60;
+		}
+
+		.fa-flag {
+			background: #FD9326;
+		}
+
+		.fa-user {
+			background: #FB2A3C;
+		}
+
+	}
+}
+
 #sidebar-left {
 	position: absolute;
 	top: $header-height;
-	width: 350px;
+	width: $sidebar-width;
 	height: 100%;
 	background: #333;
 	overflow: hidden;
 	padding: 0;
-	opacity: 0.9;
+	background-color: rgba(20,20,20,0.9);
+	margin-left: -500px;
 
 	#active-tab {
-
-	}
-
-	#tabs {
-		width: 80px;
-		margin: 0;
+		display: inline-block;
+		float: right;
+		width: $sidebar-width - $sidebar-tabs-width;
 		height: 100%;
-		list-style: none;
-		padding: 0;
-
-		li {
-			font-size: 40px;
-			color: #fcfcfc;
-
-			.fa {
-				padding: 10px;
-				width: 100%;
-				text-align: center;
-			}
-
-			&.country, &.chatter, &.stocks, &.user {
-				cursor: pointer;
-			}
-
-			.fa-comments {
-				background: #2780EF;
-			}
-
-			.fa-line-chart {
-				background: #5EBF60;
-			}
-
-			.fa-flag {
-				background: #FD9326;
-			}
-
-			.fa-user {
-				background: #FB2A3C;
-			}
-
-		}
-
+		padding: 40px;
 	}
 
 	h2 {
