@@ -13,7 +13,8 @@ header {
 	list-style: none;
 	line-height: $header-height / 2;
 	padding: 10px;
-	background: #00067c;
+	background: #000;
+	opacity: 0.8;
 	li, a {
 		display: inline-block;
 		text-decoration: none;
@@ -33,15 +34,16 @@ header {
 	background: #333;
 	overflow: hidden;
 	padding: 0;
+	opacity: 0.9;
 
 	#active-tab {
-		
+
 	}
 
 	#tabs {
+		width: 80px;
 		margin: 0;
 		height: 100%;
-		float: left;
 		list-style: none;
 		padding: 0;
 
@@ -53,6 +55,10 @@ header {
 				padding: 10px;
 				width: 100%;
 				text-align: center;
+			}
+
+			&.country, &.chatter, &.stocks, &.user {
+				cursor: pointer;
 			}
 
 			.fa-comments {
