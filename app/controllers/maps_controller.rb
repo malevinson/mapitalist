@@ -22,7 +22,17 @@ class MapsController < ApplicationController
 	    new_feature = { 
 				type: "Feature", 
 				properties: 
-					{ name: v[:name], visible: true }, 
+					{ 
+						visible: true,
+						volume: v[:volume],
+						name: v[:name],
+						dailyChange: v[:dailyChange],
+						lastTradeDate: v[:lastTradeDate],
+						lastTradeTime: v[:lastTradeTime],
+						symbol: v[:symbol],
+						alpha: v[:alpha],
+						color: v[:color]
+					}, 
 				geometry: 
 					{ type: country.poly_type, coordinates: eval(country.coordinates) }
 			}

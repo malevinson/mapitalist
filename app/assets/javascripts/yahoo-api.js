@@ -112,6 +112,7 @@ function updateGeoJSONData(){
 			var alpha = ((b - a) * (parseFloat(country.dailyChange) - min))/(max - min) + a;
 			var alphaString = alpha.toString();
 			country["alpha"] = alphaString;
+			country["color"] = numToColorGradient(alpha);
 		});
 
 		return countries;
@@ -120,4 +121,4 @@ function updateGeoJSONData(){
 
 updateGeoJSONData();
 
-var intervalID = window.setInterval(updateGeoJSONData, 30000);
+var intervalID = window.setInterval(updateGeoJSONData, 60000);

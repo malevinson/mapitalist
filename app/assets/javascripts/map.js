@@ -11,7 +11,7 @@ function initialize() {
 
   map.data.setStyle(function(feature) {
     return ({
-      fillColor: "black",
+      fillColor: feature.getProperty("color"),
       visible: feature.getProperty("visible"),
       strokeColor: "black",
       strokeWeight: 1
@@ -23,6 +23,8 @@ function initialize() {
 
   // When the user clicks
   map.data.addListener('click', function(event) {
+    var properties = event.feature.k;
+    console.log(properties);
     var name = event.feature.getProperty("name");
     $('#country-name').html(name);
   });  
