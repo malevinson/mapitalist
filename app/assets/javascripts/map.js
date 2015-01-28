@@ -61,7 +61,7 @@ function initialize() {
 
 }
 
-setTimeout(updateMapData, 500);
+setTimeout(updateMapData, 1500);
 var updateMapDataIntervalId = window.setInterval(updateMapData, 10000);
 
 function updateMapData(){

@@ -56,7 +56,7 @@ function updateGeoJSONData(){
 		success: function(response){
 
 			var countries = transformResponse(response);
-			console.log("Fetched new price data from Yahoo");
+			console.log("Fetched new price data from Yahoo", response);
 
 			$.ajax({
 			 url: "maps/update",
