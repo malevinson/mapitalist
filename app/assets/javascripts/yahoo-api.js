@@ -34,17 +34,27 @@ function updateGeoJSONData(){
 		"GREK" : "Greece",
 		"INDA" : "India",
 		"EIRL" : "Ireland",
-		"EIS"  : "Isreal",
+		"EIS"  : "Israel",
 		"NORW" : "Norway",
 		"EPU"  : "Peru",
 		"EPHE" : "Philippines",
 		"RSX"  : "Russia",
 		"THD"  : "Thailand",
 		"TUR"  : "Turkey",
-		"VNM"  : "Vietnam"
+		"VNM"  : "Vietnam",
+		"MCHI" : "China",
+		"ARGT" : "Argentina",
+		"ECH"  : "Chile",
+		"COLX" : "Columbia",
+		"EFNL" : "Finland"
 	};
 
-	var query = 'select * from yahoo.finance.quotes where symbol in ("VTI","EWA","EWC","EWD","EWG","EWH","EWI","EWJ","EWK","EWL","EWM","EWN","EWO","EWP","EWQ","EWS","EWU","EWW","EWT","EWY","EWZ","EZA")&format=json&diagnostics=true&env=http://datatables.org/alltables.env&callback=';
+	var keys = Object.keys(lookup);
+	var formattedKeys = '"' + keys.join('","') + '"';
+
+	var query = 'select * from yahoo.finance.quotes where symbol in (' +
+		formattedKeys + 
+		')&format=json&diagnostics=true&env=http://datatables.org/alltables.env&callback=';
 
 	var encodedQuery = encodeURI(query);
 
