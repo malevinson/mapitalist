@@ -48,8 +48,8 @@ function initialize() {
     console.log(properties);
     var name = event.feature.getProperty("name");
     $('#title').html(name);
+    $('.tab').removeClass('selected');
     $('#tabs .country').addClass('selected');
-    invertSelected();
     $("#sidebar-left").animate({"margin-left": '0'});
   });  
 
