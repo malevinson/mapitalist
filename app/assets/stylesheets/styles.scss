@@ -82,6 +82,16 @@ header {
 		&.country, &.chatter, &.stocks, &.user {
 			cursor: pointer;
 		}
+
+		&.tab.countries {
+			$country-fg-color: #2780EF;
+			color: $country-fg-color;
+			background-color: $tab-bg-color;
+			&.selected {
+				color: $tab-bg-color;
+				background-color: $country-fg-color;
+			}
+		}
 		
 		&.tab.country {
 			$country-fg-color: #FD9326;
@@ -94,7 +104,7 @@ header {
 		}
 
 		&.tab.chatter {
-			$chatter-fg-color: #2780EF;
+			$chatter-fg-color: #dddddd;
 			color: $chatter-fg-color;
 			background-color: $tab-bg-color;
 			&.selected {
