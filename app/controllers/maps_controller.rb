@@ -32,6 +32,7 @@ class MapsController < ApplicationController
 
     geoJSON = feature_collection.to_json
 
+    puts "Updating countries.json"
   	File.open("#{Rails.root}/public/assets/javascripts/countries.json","w") do |f|
 		  f.write(geoJSON)
 		end
