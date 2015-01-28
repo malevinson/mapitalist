@@ -1,9 +1,29 @@
 var map;
+
+var mapStyle = [{
+  'featureType': 'all',
+  'elementType': 'all',
+  'stylers': [{'visibility': 'off'}]
+}, {
+  'featureType': 'landscape',
+  'elementType': 'geometry',
+  'stylers': [{'visibility': 'on'}, {'color': '#fcfcfc'}]
+}, {
+  'featureType': 'water',
+  'elementType': 'labels',
+  'stylers': [{'visibility': 'off'}]
+}, {
+  'featureType': 'water',
+  'elementType': 'geometry',
+  'stylers': [{'visibility': 'on'}, {'color': '#000000'}]
+}];
+
 function initialize() {
   // Create a simple map.
   map = new google.maps.Map(document.getElementById('map-canvas'), {
     zoom: 2,
-    center: {lat: 0, lng: 0}
+    center: {lat: 0, lng: 0}/*,
+    styles: mapStyle*/
   });
 
   // Load country boundaries from GeoJSON
@@ -39,18 +59,36 @@ function initialize() {
     map.data.revertStyle();
   });
 
-  function updateStyle(){
-    map.data.setStyle(function(feature) {
-      return ({
-        fillColor: numToColorGradient(Math.random() * 2 - 1),
-        strokeColor: "black",
-        strokeWeight: 1
+}
+
+setTimeout(updateMapData, 500);
+var updateMapDataIntervalId = window.setInterval(updateMapData, 10000);
+
+function updateMapData(){
+  $.ajax({
+    type: 'GET',
+    dataType: 'json',
+    url: '/maps/countries',
+    success: function(json){
+      
+      // iterate over ever feature (country)
+      map.data.forEach(function(feature) {
+        var countryName = feature.getProperty("name");
+        var jsonObj = _.find(json.features, function(feature){
+          return feature.properties.name == countryName;
+        });
+  
+        feature.forEachProperty(function(v,k){
+          // set each map property to equal the json value
+          feature.setProperty(k, jsonObj.properties[k]);
+        });
       });
-    });
-  }
 
-  // var color = numToColorGradient(-1);
-  // console.log(color);
-  // var intervalID = window.setInterval(updateStyle, 3000);
+    console.log("Updated map to match server data");
 
+    },
+    failure: function(){
+      console.log("error fetching " + this.url);
+    }
+  });
 }

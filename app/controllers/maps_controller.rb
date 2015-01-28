@@ -47,8 +47,6 @@ class MapsController < ApplicationController
 		  f.write(geoJSON)
 		end
 
-    # puts feature_collection[:features].to_json
-
     render json: geoJSON
   end
 

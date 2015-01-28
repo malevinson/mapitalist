@@ -56,13 +56,15 @@ function updateGeoJSONData(){
 		success: function(response){
 
 			var countries = transformResponse(response);
-			console.log("Success: Posting Countries", countries);
+			console.log("Fetched new price data from Yahoo");
 
 			$.ajax({
 			 url: "maps/update",
 			 type: "POST",
-			 // data: countries
-			 data: {countries: countries}
+			 data: {countries: countries},
+			 success: function(){
+			 	console.log("Updated server with latest price data", countries);
+			 }
 			});
 
 		 },
