@@ -54,7 +54,7 @@ $.ajax(
 	success: function(response){
 
 		var countries = transformResponse(response);
-		console.log("Success: Posting Countries", countries);
+		// console.log("Success: Posting Countries", countries);
 
 		$.ajax({
 		 url: "maps/update",
