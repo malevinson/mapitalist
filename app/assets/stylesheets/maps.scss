@@ -5,6 +5,7 @@
 $header-height: 40px;
 $sidebar-width: 450px;
 $sidebar-tabs-width: 80px;
+$tab-bg-color: rgba(20,20,20,1);
 
 * {
 	box-sizing: border-box;
@@ -39,36 +40,39 @@ header {
 	height: 100%;
 	list-style: none;
 	padding: 0;
-	background-color: rgba(20,20,20,1);
+	background-color: $tab-bg-color;
 
 	li {
 		font-size: 40px;
 		color: #fcfcfc;
+		display: block;
 
 		.fa {
 			padding: 10px;
 			width: 100%;
 			text-align: center;
+			background-color: $tab-bg-color;
 		}
 
 		&.country, &.chatter, &.stocks, &.user {
 			cursor: pointer;
 		}
-
-		.fa-comments {
-			background: #2780EF;
+		
+		&.tab.country {
+			color: #FD9326;
 		}
 
-		.fa-line-chart {
-			background: #5EBF60;
+		&.tab.chatter {
+			color: #2780EF;
 		}
 
-		.fa-flag {
-			background: #FD9326;
+		&.tab.stocks {
+			color: #5EBF60;
 		}
 
-		.fa-user {
-			background: #FB2A3C;
+
+		&.tab.user {
+			color: #FB2A3C;
 		}
 
 	}
@@ -90,7 +94,7 @@ header {
 		float: right;
 		width: $sidebar-width - $sidebar-tabs-width;
 		height: 100%;
-		padding: 40px;
+		padding: 10px 40px 20px 40px;
 	}
 
 	h2 {

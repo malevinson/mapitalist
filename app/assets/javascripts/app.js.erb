@@ -14,9 +14,20 @@ $("#sidebar-left>.close").on("click", function(){
 $(".tab").on("click", function(){
 	if ($(this).hasClass("selected")){
 		// slide off screen
+		$(".fa", this).css({'color': $(".fa", this).css('background-color'), 'background-color': $(".fa", this).css('color')});
 		$(".selected").removeClass("selected");
 		$("#sidebar-left").animate({"margin-left": '-=500'})
 	} else {
+		$(".selected .fa").each(function(){
+
+			var color = $(this).css('color');
+			var bgColor = $(this).css('background-color');
+
+			$(this).css({'color': bgColor, 'background-color': color })
+		});
+
+		$(".fa", this).css({'color': $(".fa", this).css('background-color'), 'background-color': $(".fa", this).css('color')});
+
 		// slide on screen or change tabs
 		$(".selected").removeClass("selected");
 		$(this).addClass("selected");
@@ -25,3 +36,12 @@ $(".tab").on("click", function(){
 });
 
 // <- sidebar toggling
+
+// button styling on toggle
+// $(".tab .fa").on("click", function(){
+
+// 	// revert all selected styles
+	
+
+
+// });
