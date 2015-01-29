@@ -26,6 +26,9 @@ class MapsController < ApplicationController
         country.day_low = k["dayLow"]
         country.last_price = k["lastPrice"]
 
+      # puts country.inspect
+      # puts "***"
+
       if country.save
         country_ids << country.id
       end

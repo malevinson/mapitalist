@@ -1,4 +1,4 @@
-function updateGeoJSONData(){
+function updateGeoJSONData() {
 
 	// javascript object mapping symbols to their countries
 	var lookup = {
@@ -74,7 +74,7 @@ function updateGeoJSONData(){
 				 type: "POST",
 				 data: {countries: countries},
 				 success: function(){
-				 	updateMapData;
+				 	updateMapData();
 				 	console.log("Updated server with latest price data", countries);
 				 }
 				});
@@ -151,4 +151,4 @@ function updateGeoJSONData(){
 
 updateGeoJSONData();
 
-var intervalID = window.setInterval(updateGeoJSONData, 10000);
+// var intervalID = window.setInterval(updateGeoJSONData, 10000);

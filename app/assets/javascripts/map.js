@@ -54,7 +54,7 @@ function updateMapData(){
   $.ajax({
     type: 'GET',
     dataType: 'json',
-    url: '/maps/countries',
+    url: '/maps/countries.json',
     success: function(json){
       
     // iterate over ever feature (country)
