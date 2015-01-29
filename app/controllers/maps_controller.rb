@@ -1,6 +1,8 @@
 class MapsController < ApplicationController
+  @@countries_json_file = "#{Rails.root}/tmp/countries.json"
+
   def countries
-  	render :file => "#{Rails.root}/tmp/countries.json", 
+  	render :file => @@countries_json_file, 
 	  	     :content_type => 'application/json',
 	  	     :layout => false
   end
@@ -8,7 +10,7 @@ class MapsController < ApplicationController
   def update
     geoJSON = Country.buildJSON(params)
 
-  	File.open("#{Rails.root}/tmp/countries.json","w") do |f|
+  	File.open(@@countries_json_file,"w") do |f|
 		  f.write(geoJSON)
 		end
     
