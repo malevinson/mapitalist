@@ -15,11 +15,34 @@ function changeSelectedTab(tab) {
 }
 
 function updateCountriesTab(){
-	var title = 'CountriesTab';
-	var body = 'CountriesTab Body';
+	console.log("k");
+	var title = 'All Countries';
+	
+	var table = $('<table></table>').attr('id', 'countryIndexTable');
+
+	map.data.forEach(function(feature) {
+	  var featureCountryName = feature.getProperty("name");
+	  var dailyChangeFloat = ((feature.getProperty("dailyChange") - 1)).toFixed(2);
+	  var dailyChange = dailyChangeFloat.toString() + '%';
+
+	  table.append($('<tr></tr>')
+	  	.addClass("country")
+	  	.addClass(featureCountryName)
+	  	.append($('<td></td>')
+	  		.html(featureCountryName)
+	  		.addClass('key'))
+	  	.append($('<td></td>')
+	  		.addClass('right')
+	  		.css('color', feature.getProperty("color"))
+	  		.html(dailyChange))
+	  	.addClass('daily-change'));
+	});
+
+	// ensure the countries tab is active before we update the active tab
+	if (!$(".tab.countries").hasClass("selected")) return false;
 
 	$('#active-tab #title').html(title);
-	$('#active-tab #body').html(body);
+	$('#active-tab #body').html(table);
 }
 
 function updateCountryTab(){

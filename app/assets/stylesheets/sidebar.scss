@@ -22,6 +22,9 @@
 			padding: 10px;
 			width: 100%;
 			text-align: center;
+			&:hover {
+				text-shadow: red 5 5px;
+			}
 		}
 
 		&.countries, &.country, &.chatter, &.stocks, &.user {
@@ -32,7 +35,7 @@
 			$country-fg-color: #2780EF;
 			color: $country-fg-color;
 			background-color: $tab-bg-color;
-			&.selected {
+			&.selected, &:hover {
 				color: $tab-bg-color;
 				background-color: $country-fg-color;
 			}
@@ -42,7 +45,7 @@
 			$country-fg-color: #FD9326;
 			color: $country-fg-color;
 			background-color: $tab-bg-color;
-			&.selected {
+			&.selected, &:hover {
 				color: $tab-bg-color;
 				background-color: $country-fg-color;
 			}
@@ -52,7 +55,7 @@
 			$chatter-fg-color: #dddddd;
 			color: $chatter-fg-color;
 			background-color: $tab-bg-color;
-			&.selected {
+			&.selected, &:hover {
 				color: $tab-bg-color;
 				background-color: $chatter-fg-color;
 			}
@@ -62,7 +65,7 @@
 			$stocks-fg-color: #5EBF60;
 			color: $stocks-fg-color;
 			background-color: $tab-bg-color;
-			&.selected {
+			&.selected, &:hover {
 				color: $tab-bg-color;
 				background-color: $stocks-fg-color;
 			}
@@ -72,7 +75,7 @@
 			$user-fg-color: #FB2A3C;
 			color: $user-fg-color;
 			background-color: $tab-bg-color;
-			&.selected {
+			&.selected, &:hover {
 				color: $tab-bg-color;
 				background-color: $user-fg-color;
 			}
@@ -118,6 +121,7 @@
 		width: $sidebar-width - $sidebar-tabs-width;
 		height: 100%;
 		padding: 10px 40px 20px 40px;
+		overflow-y: auto;
 
 		#title {
 

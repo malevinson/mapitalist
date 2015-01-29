@@ -2,15 +2,18 @@
 
 html,
 body,
-main,
-#map-canvas {
-  height: 100%;
-  margin: 0px;
-  padding: 0px
-}
+main {
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	overflow: hidden;
 
-#map-canvas {
-	margin-left: $sidebar-tabs-width;
+	#map-canvas {
+		margin-left: $sidebar-tabs-width;
+	  height: 100%;
+	  margin: 0px;
+	  padding: 0px;
+	}
 }
 
 * {
