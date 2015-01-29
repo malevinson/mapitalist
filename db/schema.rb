@@ -11,17 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150127235137) do
+ActiveRecord::Schema.define(version: 20150129051638) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "countries", force: :cascade do |t|
     t.text     "coordinates"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.string   "name"
     t.string   "poly_type"
+    t.boolean  "visible",         default: false
+    t.string   "volume",          default: ""
+    t.float    "daily_change",    default: 0.0
+    t.string   "last_trade_date", default: ""
+    t.string   "last_trade_time", default: ""
+    t.string   "symbol",          default: ""
+    t.string   "alpha",           default: ""
+    t.string   "color",           default: ""
+    t.string   "fund_name_full",  default: ""
+    t.string   "year_high",       default: ""
+    t.string   "year_low",        default: ""
+    t.string   "day_high",        default: ""
+    t.string   "day_low",         default: ""
+    t.string   "last_price",      default: ""
   end
 
   create_table "users", force: :cascade do |t|

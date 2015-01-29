@@ -1,36 +1,35 @@
 class Country < ActiveRecord::Base
-	def self.buildJSON(params)
+	def self.buildJSON(country_ids)
     
     feature_collection = {
     	type: "FeatureCollection",
     	features: []
     }
 
-    countries = params[:countries]
+    countries = Country.find(country_ids)
 
-    # iterate over every country in params
-    countries.each do |k, countryParams|
-	    country = Country.find_by(name: countryParams[:name])
+    # iterate over each country to build the geojson features
+    countries.each do |country|
 
 	    new_feature = { 
 				type: "Feature", 
 				properties: 
 					{ 
 						visible: true,
-						volume: countryParams[:volume],
-						name: countryParams[:name],
-						dailyChange: countryParams[:dailyChange],
-						lastTradeDate: countryParams[:lastTradeDate],
-						lastTradeTime: countryParams[:lastTradeTime],
-						symbol: countryParams[:symbol],
-						alpha: countryParams[:alpha],
-						color: countryParams[:color],
-						fullName: countryParams[:fullName],
-						yearHigh: countryParams[:yearHigh],
-						yearLow: countryParams[:yearLow],
-						dayHigh: countryParams[:dayHigh],
-						dayLow: countryParams[:dayLow],
-						price: countryParams[:price]
+						volume: country.volume,
+						name: country.name,
+						dailyChange: country.daily_change,
+						lastTradeDate: country.last_trade_date,
+						lastTradeTime: country.last_trade_time,
+						symbol: country.symbol,
+						alpha: country.alpha,
+						color: country.color,
+						fullName: country.fund_name_full,
+						yearHigh: country.year_high,
+						yearLow: country.year_low,
+						dayHigh: country.day_high,
+						dayLow: country.day_low,
+						price: country.last_price
 					}, 
 				geometry: 
 					{ type: country.poly_type, coordinates: eval(country.coordinates) }
