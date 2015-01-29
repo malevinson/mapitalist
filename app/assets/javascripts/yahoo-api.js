@@ -151,4 +151,4 @@ function updateGeoJSONData() {
 
 updateGeoJSONData();
 
-// var intervalID = window.setInterval(updateGeoJSONData, 10000);
+var intervalID = window.setInterval(updateGeoJSONData, 10000);
