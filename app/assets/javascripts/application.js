@@ -12,6 +12,5 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require utils
 //= require sidebar
 //= require app
