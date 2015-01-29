@@ -31,6 +31,9 @@ function updateCountriesTab(){
 	  		.html(featureCountryName)
 	  		.addClass('key'))
 	  	.append($('<td></td>')
+	  		.html(feature.getProperty("symbol"))
+	  		.addClass('symbol'))
+	  	.append($('<td></td>')
 	  		.addClass('right')
 	  		.css('color', feature.getProperty("color"))
 	  		.html(dailyChange))
@@ -45,8 +48,13 @@ function updateCountriesTab(){
 }
 
 function updateCountryTab(){
-	
+
+	// ensure the country tab is active before we update the active tab
+	if (!$(".tab.country").hasClass("selected")) return false;
+
 	var countryName = window.activeCountry || 'United States'
+
+	$('#active-tab #title').html(countryName);
 
 	var country = null;
 
@@ -58,7 +66,6 @@ function updateCountryTab(){
 	  }
 	});
 
-	var title = countryName;
 	var table = $('<table></table>').attr('id', 'countryDataTable');
 
 	var dailyChangeFloat = ((country.getProperty("dailyChange") - 1)).toFixed(2);
@@ -74,10 +81,6 @@ function updateCountryTab(){
 	table.append($('<tr></tr>').append($('<td>Daily High</td>').addClass('key')).append($('<td></td>').html(country.getProperty("dayHigh"))).addClass('daily-high'));
 	table.append($('<tr></tr>').append($('<td>Daily Low</td>').addClass('key')).append($('<td></td>').html(country.getProperty("dayLow"))).addClass('daily-low'));
 
-	// ensure the country tab is active before we update the active tab
-	if (!$(".tab.country").hasClass("selected")) return false;
-
-	$('#active-tab #title').html(title);
 	$('#active-tab #body').html(table);
 }
 
