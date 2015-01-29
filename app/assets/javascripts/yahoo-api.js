@@ -74,6 +74,7 @@ function updateGeoJSONData(){
 				 type: "POST",
 				 data: {countries: countries},
 				 success: function(){
+				 	updateMapData;
 				 	console.log("Updated server with latest price data", countries);
 				 }
 				});
@@ -111,7 +112,7 @@ function updateGeoJSONData(){
 			}
 
 			// uncomment for demo mode
-			// dailyChange = randomIntFromInterval(80,120) / 100;
+			dailyChange = randomIntFromInterval(80,120) / 100;
 
 			min = dailyChange < min ? dailyChange : min;
 			max = dailyChange > max ? dailyChange : max;
@@ -150,4 +151,4 @@ function updateGeoJSONData(){
 
 updateGeoJSONData();
 
-var intervalID = window.setInterval(updateGeoJSONData, 60000);
+var intervalID = window.setInterval(updateGeoJSONData, 10000);

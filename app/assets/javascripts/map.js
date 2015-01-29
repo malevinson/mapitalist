@@ -87,6 +87,8 @@ function updateMapData(){
       });
     });
 
+    updateCountryTab();
+
     console.log("Updated map to match server data");
 
     },

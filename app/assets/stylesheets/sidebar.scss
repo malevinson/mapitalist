@@ -1,0 +1,157 @@
+@import 'variables';
+
+#tabs {
+	position: absolute;
+	top: $header-height;
+	width: $sidebar-tabs-width;
+	z-index: 2;
+
+	display: inline-block;
+	margin: 0;
+	height: 100%;
+	list-style: none;
+	padding: 0;
+	background-color: $tab-bg-color;
+
+	li {
+		font-size: 40px;
+		color: $font-color-offwhite;
+		display: block;
+
+		.fa {
+			padding: 10px;
+			width: 100%;
+			text-align: center;
+		}
+
+		&.country, &.chatter, &.stocks, &.user {
+			cursor: pointer;
+		}
+
+		&.tab.countries {
+			$country-fg-color: #2780EF;
+			color: $country-fg-color;
+			background-color: $tab-bg-color;
+			&.selected {
+				color: $tab-bg-color;
+				background-color: $country-fg-color;
+			}
+		}
+		
+		&.tab.country {
+			$country-fg-color: #FD9326;
+			color: $country-fg-color;
+			background-color: $tab-bg-color;
+			&.selected {
+				color: $tab-bg-color;
+				background-color: $country-fg-color;
+			}
+		}
+
+		&.tab.chatter {
+			$chatter-fg-color: #dddddd;
+			color: $chatter-fg-color;
+			background-color: $tab-bg-color;
+			&.selected {
+				color: $tab-bg-color;
+				background-color: $chatter-fg-color;
+			}
+		}
+
+		&.tab.stocks {
+			$stocks-fg-color: #5EBF60;
+			color: $stocks-fg-color;
+			background-color: $tab-bg-color;
+			&.selected {
+				color: $tab-bg-color;
+				background-color: $stocks-fg-color;
+			}
+		}
+
+		&.tab.user {
+			$user-fg-color: #FB2A3C;
+			color: $user-fg-color;
+			background-color: $tab-bg-color;
+			&.selected {
+				color: $tab-bg-color;
+				background-color: $user-fg-color;
+			}
+		}
+
+	}
+}
+
+#sidebar-left {
+	position: absolute;
+	top: $header-height;
+	width: $sidebar-width;
+	height: 100%;
+	background: #333;
+	overflow: hidden;
+	padding: 0;
+	background-color: rgba(20,20,20,0.9);
+	margin-left: -500px;
+
+	&>.close {
+		display: table;
+		position: absolute;
+		cursor: pointer;
+		top: 10px;
+		right: 10px;
+		width: 25px;
+		height: 25px;
+		vertical-align: middle;
+		text-align: center;
+		background-color: $sidebar-bg-color;
+		color: $font-color-offwhite;
+		border-radius: 5px;
+
+		.fa {
+			display: table-cell;
+			vertical-align: middle;
+		}
+	}
+
+	#active-tab {
+		display: inline-block;
+		float: right;
+		width: $sidebar-width - $sidebar-tabs-width;
+		height: 100%;
+		padding: 10px 40px 20px 40px;
+
+		#title {
+
+		}
+
+		#body {
+			color: $font-color-offwhite;
+
+			#countryDataTable {
+				td {
+					padding: 10px 0;
+
+					&.key {
+						font-weight: bold;
+					}
+				}
+			}
+
+		}
+	}
+
+	h2 {
+		color: $font-color-offwhite;
+		text-align: center;
+	}
+
+	table {
+		position: relative;
+		width: 100%;
+		color: $font-color-offwhite;
+
+		.right {
+			text-align: right;
+		}
+	}
+
+}
