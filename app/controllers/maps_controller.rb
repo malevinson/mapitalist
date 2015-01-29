@@ -8,9 +8,10 @@ class MapsController < ApplicationController
   def update
     geoJSON = Country.buildJSON(params)
 
-  	File.open("#{Rails.root}/public/assets/javascripts/countries.json","w") do |f|
-		  f.write(geoJSON)
-		end
+  # 	File.open("#{Rails.root}/public/assets/javascripts/countries.json","w") do |f|
+		#   f.write(geoJSON)
+		# end
+    
     render json: geoJSON
     puts "Updated countries.json"
   end
