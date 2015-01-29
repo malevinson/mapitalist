@@ -90,6 +90,7 @@ function updateCountryTab(section){
 }
 
 function updateStocksTab(section){
+	console.log("updateStocksTab triggered");
 	$('.title', section).html('My Stocks');
 	
 	$.ajax({
@@ -102,22 +103,22 @@ function updateStocksTab(section){
 		error: function(response){
 
 		}
-	})
+	});
 }
 
 function updateChatterTab(section){
 	var title = 'ChatterTab';
 	var body = 'ChatterTab Body';
 
-	$('#active-tab #title').html(title);
-	$('#active-tab #body').html(body);
+	$('.title', section).html(title);
+	$('.body', section).html(body);
 }
 
 function updateUserTab(section){
 	var title = 'UserTab';
 	var body = 'UserTab Body';
 
-	$('#active-tab #title').html(title);
-	$('#active-tab #body').html(body);
+	$('.title', section).html(title);
+	$('.body', section).html(body);
 }
 

@@ -1,65 +1,53 @@
-function updateGeoJSONData() {
-	// javascript object mapping symbols to their countries
-	var lookup = {
-		"VTI"  : "United States",
-		"EWA"  : "Australia",
-		"EWC"  : "Canada",
-		"EWD"  : "Sweden",
-		"EWG"  : "Germany",
-		"EWH"  : "Hong Kong",
-		"EWI"  : "Italy",
-		"EWJ"  : "Japan",
-		"EWK"  : "Belgium",
-		"EWL"  : "Switzerland",
-		"EWM"  : "Malaysia",
-		"EWN"  : "Netherlands",
-		"EWO"  : "Austria",
-		"EWP"  : "Spain",
-		"EWQ"  : "France",
-		"EWS"  : "Singapore",
-		"EWU"  : "United Kingdom",
-		"EWW"  : "Mexico",
-		"EWT"  : "Taiwan",
-		"EWY"  : "South Korea",
-		"EWZ"  : "Brazil",
-		"EZA"  : "South Africa",
-		"PLND" : "Poland",
-		"EIDO" : "Indonesia",
-		"ENZL" : "New Zealand",
-		"COLX" : "Columbia",
-		"EDEN" : "Denmark",
-		"EGPT" : "Egypt",
-		"EFNL" : "Finland",
-		"GREK" : "Greece",
-		"INDA" : "India",
-		"EIRL" : "Ireland",
-		"EIS"  : "Israel",
-		"NORW" : "Norway",
-		"EPU"  : "Peru",
-		"EPHE" : "Philippines",
-		"RSX"  : "Russia",
-		"THD"  : "Thailand",
-		"TUR"  : "Turkey",
-		"VNM"  : "Vietnam",
-		"MCHI" : "China",
-		"ARGT" : "Argentina",
-		"ECH"  : "Chile",
-		"COLX" : "Columbia",
-		"EFNL" : "Finland"
-	};
+// javascript object mapping symbols to their countries
+var lookup = {
+	"VTI"  : "United States",
+	"EWA"  : "Australia",
+	"EWC"  : "Canada",
+	"EWD"  : "Sweden",
+	"EWG"  : "Germany",
+	"EWH"  : "Hong Kong",
+	"EWI"  : "Italy",
+	"EWJ"  : "Japan",
+	"EWK"  : "Belgium",
+	"EWL"  : "Switzerland",
+	"EWM"  : "Malaysia",
+	"EWN"  : "Netherlands",
+	"EWO"  : "Austria",
+	"EWP"  : "Spain",
+	"EWQ"  : "France",
+	"EWS"  : "Singapore",
+	"EWU"  : "United Kingdom",
+	"EWW"  : "Mexico",
+	"EWT"  : "Taiwan",
+	"EWY"  : "South Korea",
+	"EWZ"  : "Brazil",
+	"EZA"  : "South Africa",
+	"PLND" : "Poland",
+	"EIDO" : "Indonesia",
+	"ENZL" : "New Zealand",
+	"COLX" : "Columbia",
+	"EDEN" : "Denmark",
+	"EGPT" : "Egypt",
+	"EFNL" : "Finland",
+	"GREK" : "Greece",
+	"INDA" : "India",
+	"EIRL" : "Ireland",
+	"EIS"  : "Israel",
+	"NORW" : "Norway",
+	"EPU"  : "Peru",
+	"EPHE" : "Philippines",
+	"RSX"  : "Russia",
+	"THD"  : "Thailand",
+	"TUR"  : "Turkey",
+	"VNM"  : "Vietnam",
+	"MCHI" : "China",
+	"ARGT" : "Argentina",
+	"ECH"  : "Chile",
+	"COLX" : "Columbia",
+	"EFNL" : "Finland"
+};
 
-	var keys = Object.keys(lookup);
-	var formattedKeys = '"' + keys.join('","') + '"';
-
-	var query = 'select * from yahoo.finance.quotes where symbol in (' +
-		formattedKeys + 
-		')&format=json&diagnostics=true&env=http://datatables.org/alltables.env&callback=';
-
-	var encodedQuery = encodeURI(query);
-
-	var encodedURI = 'https://query.yahooapis.com/v1/public/yql?q=' + encodedQuery;
-
-	// call to Yahoo API requesting stock information for lookup list
+function queryYahoo(encodedURI) {
 	$.ajax(
 		{url: encodedURI,
 		success: function(response){
@@ -146,6 +134,28 @@ function updateGeoJSONData() {
 
 		return countries;
 	}
+}
+
+// returns an encoded yql query url for the given stock symbols
+function buildQuery(keyArray){
+	var formattedKeys = '"' + keyArray.join('","') + '"';
+	var query = 'select * from yahoo.finance.quotes where symbol in (' +
+		formattedKeys + 
+		')&format=json&diagnostics=true&env=http://datatables.org/alltables.env&callback=';
+
+	var encodedQuery = encodeURI(query);
+
+	return 'https://query.yahooapis.com/v1/public/yql?q=' + encodedQuery;
+}
+
+function updateGeoJSONData() {
+
+	var keys = Object.keys(lookup);
+
+	encodedURI = buildQuery(keys);
+
+	// call to Yahoo API requesting stock information for lookup list
+	queryYahoo(encodedURI);
 }
 
 updateGeoJSONData();

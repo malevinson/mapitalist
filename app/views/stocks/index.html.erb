@@ -1,5 +1,30 @@
-<ul>
-	<% @watched_stocks.each do |stock| %>
-		<li><%= stock.symbol %></li>
-	<% end %>
-</ul>
+<%= form_for current_user.stocks.build do |f| %>
+	<%= f.search_field :symbol, placeholder: "AAPL" %>
+	<%= f.submit "Search" %>
+<% end %>
+
+<!-- exclude the blank stock we're building in the form -->
+<% @ws = @watched_stocks[0...-1] %>
+
+<% if @ws_length == 0 %>
+	<!-- no stocks -->
+	<p>You aren't tracking any stocks yet.</p>
+<% else %>
+	<!-- list stocks -->
+	<ul>
+		<% @ws.each do |stock| %>
+			<li><%= stock.symbol %></li>
+		<% end %>
+	</ul>
+<% end %>
+
+<script type="text/javascript">
+	$('.new_stock').on('submit', function(event){
+		event.preventDefault();
+		// check that the submitted symbol exists
+		// if it doesn't, tell the user
+		// if it doesn't, post it to our db and update the view (with info from Yahoo)
+		var symbol = $('input[name="stock[symbol]"]').val();
+		console.log(symbol);
+	});
+</script>
