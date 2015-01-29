@@ -1,7 +1,6 @@
 window.activeCountry = 'United States';
 
 function changeSelectedTab(tab) {
-	console.log("change selected tab");
 	$('section').hide();
 	var section = $('section').eq(tab.index());
 
@@ -21,7 +20,6 @@ function changeSelectedTab(tab) {
 }
 
 function updateCountriesTab(section){
-	console.log("update countries tab");
 	$('.title', section).html('All Countries');
 
 	var table = $('<table></table>').attr('id', 'countryIndexTable');
@@ -51,9 +49,6 @@ function updateCountriesTab(section){
 }
 
 function updateCountryTab(section){
-
-	console.log("update country tab");
-
 	var countryName = window.activeCountry;
 
 	var country = null;
@@ -90,12 +85,7 @@ function updateCountryTab(section){
 	table.append($('<tr></tr>').append($('<td>Daily Low</td>').addClass('key'))
 		.append($('<td></td>').html(country.getProperty("dayLow"))).addClass('daily-low'));
 
-	table.append($('<tr></tr>').append($('<td>test</td>').addClass('key'))
-		.append($('<td></td>').html(countryName)));
-
 	$('.title', section).html(countryName);
-	console.log($('.title', section).html());
-
 	$('.body', section).html(table);
 }
 
