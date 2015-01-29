@@ -2,18 +2,17 @@
 
 html,
 body,
-main {
-	height: 100%;
-	margin: 0px;
-	padding: 0px;
-	overflow: hidden;
+main, 
+#map-canvas {
+  margin: 0px;
+  height: 100%;
+  padding: 0px;
+  overflow: hidden;
+  background: $tab-bg-color;
+}
 
-	#map-canvas {
-		margin-left: $sidebar-tabs-width;
-	  height: 100%;
-	  margin: 0px;
-	  padding: 0px;
-	}
+#map-canvas {
+	margin-left: $sidebar-tabs-width;
 }
 
 * {
@@ -21,12 +20,16 @@ main {
 }
 
 header {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	z-index: 3;
 	height: $header-height;
 	list-style: none;
 	line-height: $header-height / 2;
 	padding: 10px;
 	background: $header-bg-color;
-	opacity: 0.8;
 	li, a {
 		display: inline-block;
 		text-decoration: none;

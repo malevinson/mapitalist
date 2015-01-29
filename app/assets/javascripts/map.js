@@ -1,29 +1,11 @@
 var map;
 
-var mapStyle = [{
-  'featureType': 'all',
-  'elementType': 'all',
-  'stylers': [{'visibility': 'off'}]
-}, {
-  'featureType': 'landscape',
-  'elementType': 'geometry',
-  'stylers': [{'visibility': 'on'}, {'color': '#dddddd'}]
-}, {
-  'featureType': 'water',
-  'elementType': 'labels',
-  'stylers': [{'visibility': 'off'}]
-}, {
-  'featureType': 'water',
-  'elementType': 'geometry',
-  'stylers': [{'visibility': 'on'}, {'color': '#2C2040'}]
-}];
-
 function initialize() {
   // Create a simple map.
   map = new google.maps.Map(document.getElementById('map-canvas'), {
     zoom: 2,
-    center: {lat: 0, lng: 0}/*,
-    styles: mapStyle*/
+    center: {lat: 0, lng: 0},
+    disableDefaultUI: true
   });
 
   // Load country boundaries from GeoJSON
