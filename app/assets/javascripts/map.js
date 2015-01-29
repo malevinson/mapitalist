@@ -2,7 +2,7 @@ var map;
 
 function initialize() {
   // Create a simple map.
-  console.log("initialize map");
+  console.log("Initialized map");
   map = new google.maps.Map(document.getElementById('map-canvas'), {
     zoom: 2,
     center: {lat: 0, lng: 0},
@@ -27,8 +27,6 @@ function initialize() {
 
   // When the user clicks
   map.data.addListener('click', function(event) {
-    // var properties = event.feature.k;
-    // console.log(properties);
     var name = event.feature.getProperty("name");
     window.activeCountry = name;
     $('.tab').removeClass('selected');
@@ -52,7 +50,6 @@ setTimeout(updateMapData, 1500);
 var updateMapDataIntervalId = window.setInterval(updateMapData, 10000);
 
 function updateMapData(){
-  console.log("update map data");
   $.ajax({
     type: 'GET',
     dataType: 'json',
@@ -72,13 +69,11 @@ function updateMapData(){
       });
     });
 
-    // changeSelectedTab($('#tabs .selected'));
-
     console.log("Updated map to match server data");
 
     },
     failure: function(){
-      console.log("error fetching " + this.url);
+      console.log("Error fetching " + this.url);
     }
   });
 }

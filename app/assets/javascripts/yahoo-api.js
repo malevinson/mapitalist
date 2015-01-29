@@ -1,5 +1,4 @@
 function updateGeoJSONData() {
-	console.log("update geojsondata");
 	// javascript object mapping symbols to their countries
 	var lookup = {
 		"VTI"  : "United States",
@@ -89,7 +88,6 @@ function updateGeoJSONData() {
 	});
 
 	function transformResponse(response){
-		console.log("transform response");
 		var results = response.query.results.quote;
 
 		var min = Number.POSITIVE_INFINITY;
