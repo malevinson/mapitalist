@@ -1,5 +1,5 @@
 function updateGeoJSONData() {
-
+	console.log("update geojsondata");
 	// javascript object mapping symbols to their countries
 	var lookup = {
 		"VTI"  : "United States",
@@ -64,7 +64,7 @@ function updateGeoJSONData() {
 	$.ajax(
 		{url: encodedURI,
 		success: function(response){
-			console.log("Fetched new price data from Yahoo", response);
+			console.log("Fetched new price data from Yahoo");
 
 			var countries = transformResponse(response);
 			
@@ -75,7 +75,7 @@ function updateGeoJSONData() {
 				 data: {countries: countries},
 				 success: function(){
 				 	updateMapData();
-				 	console.log("Updated server with latest price data", countries);
+				 	console.log("Updated server with latest price data");
 				 }
 				});
 			} else {
@@ -89,6 +89,7 @@ function updateGeoJSONData() {
 	});
 
 	function transformResponse(response){
+		console.log("transform response");
 		var results = response.query.results.quote;
 
 		var min = Number.POSITIVE_INFINITY;

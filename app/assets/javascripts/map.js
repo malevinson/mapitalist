@@ -2,6 +2,7 @@ var map;
 
 function initialize() {
   // Create a simple map.
+  console.log("initialize map");
   map = new google.maps.Map(document.getElementById('map-canvas'), {
     zoom: 2,
     center: {lat: 0, lng: 0},
@@ -51,6 +52,7 @@ setTimeout(updateMapData, 1500);
 var updateMapDataIntervalId = window.setInterval(updateMapData, 10000);
 
 function updateMapData(){
+  console.log("update map data");
   $.ajax({
     type: 'GET',
     dataType: 'json',
@@ -70,7 +72,7 @@ function updateMapData(){
       });
     });
 
-    changeSelectedTab($('#tabs .selected'));
+    // changeSelectedTab($('#tabs .selected'));
 
     console.log("Updated map to match server data");
 

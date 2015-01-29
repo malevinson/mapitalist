@@ -1,12 +1,23 @@
+// generate close button
 $("#sidebar-left").append($("<div></div>").addClass('close').html('<i class="fa fa-times"></i>'));
+
+// generate tabs
 $("#tabs").append($("<li></li>").addClass('tab countries').html('<i class="fa fa-globe"></i>'));
 $("#tabs").append($("<li></li>").addClass('tab country').html('<i class="fa fa-flag"></i>'));
 $("#tabs").append($("<li></li>").addClass('tab stocks').html('<i class="fa fa-line-chart"></i>'));
 $("#tabs").append($("<li></li>").addClass('tab chatter').html('<i class="fa fa-comments"></i>'));
 $("#tabs").append($("<li></li>").addClass('tab user').html('<i class="fa fa-user"></i>'));
 
-// sidebar toggling
+// generate active tab sections
+$('.tab').each(function(i){
+	var section = $('<section></section>');
+	section.append($('<h2 class="title">' + i + '</h2>'));
+	section.append($('<div class="body">body</div>'));
 
+	$('#active-tab').append(section);
+});
+
+// handle sidebar toggling
 $("#sidebar-left>.close").on("click", function(){
 	$(".tab").removeClass("selected")
 	$("#sidebar-left").animate({"margin-left": '-=500'})
@@ -21,9 +32,8 @@ $(".tab").on("click", function(){
 		// slide on screen or change tabs
 		$(".selected").removeClass("selected");
 		$(this).addClass("selected");
-		changeSelectedTab($(this));
+		changeSelectedTab($('#tabs .selected'));
 		$("#sidebar-left").animate({"margin-left": '0'})
 	}
 });
 
-// <- sidebar toggling

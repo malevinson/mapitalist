@@ -105,14 +105,22 @@
 		padding: 10px 50px (40px + $header-height) 50px;
 		overflow: auto;
 
-		#title {
+		section {
+
+			display: none;
+
+			.title {
+				z-index: 99;
+				position: relative;
+			}
+
+			.body {
+				color: $font-color-offwhite;
+
+			}
 
 		}
 
-		#body {
-			color: $font-color-offwhite;
-
-		}
 	}
 
 	h2 {
