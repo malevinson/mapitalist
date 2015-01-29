@@ -44,12 +44,13 @@ function initialize() {
 
   // When the user clicks
   map.data.addListener('click', function(event) {
-    var properties = event.feature.k;
-    console.log(properties);
+    // var properties = event.feature.k;
+    // console.log(properties);
     var name = event.feature.getProperty("name");
-    $('#title').html(name);
+    window.activeCountry = name;
     $('.tab').removeClass('selected');
     $('#tabs .country').addClass('selected');
+    changeSelectedTab($('#tabs .country'));
     $("#sidebar-left").animate({"margin-left": '0'});
   });  
 
@@ -61,7 +62,6 @@ function initialize() {
   map.data.addListener('mouseout', function(event) {
     map.data.revertStyle();
   });
-
 }
 
 setTimeout(updateMapData, 1500);
@@ -74,18 +74,18 @@ function updateMapData(){
     url: '/maps/countries',
     success: function(json){
       
-      // iterate over ever feature (country)
-      map.data.forEach(function(feature) {
-        var countryName = feature.getProperty("name");
-        var jsonObj = _.find(json.features, function(feature){
-          return feature.properties.name == countryName;
-        });
-  
-        feature.forEachProperty(function(v,k){
-          // set each map property to equal the json value
-          feature.setProperty(k, jsonObj.properties[k]);
-        });
+    // iterate over ever feature (country)
+    map.data.forEach(function(feature) {
+      var countryName = feature.getProperty("name");
+      var jsonObj = _.find(json.features, function(feature){
+        return feature.properties.name == countryName;
       });
+
+      feature.forEachProperty(function(v,k){
+        // set each map property to equal the json value
+        feature.setProperty(k, jsonObj.properties[k]);
+      });
+    });
 
     console.log("Updated map to match server data");
 

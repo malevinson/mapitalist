@@ -21,6 +21,7 @@ $(".tab").on("click", function(){
 		// slide on screen or change tabs
 		$(".selected").removeClass("selected");
 		$(this).addClass("selected");
+		changeSelectedTab($(this));
 		$("#sidebar-left").animate({"margin-left": '0'})
 	}
 });

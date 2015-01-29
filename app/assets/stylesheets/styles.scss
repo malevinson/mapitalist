@@ -23,8 +23,8 @@ main,
 	height: 25px;
 	vertical-align: middle;
 	text-align: center;
-	background-color: #FB2A3C;
-	color: #fcfcfc;
+	background-color: $sidebar-bg-color;
+	color: $font-color-offwhite;
 	border-radius: 5px;
 
 	.fa {
@@ -42,12 +42,12 @@ header {
 	list-style: none;
 	line-height: $header-height / 2;
 	padding: 10px;
-	background: #000;
+	background: $header-bg-color;
 	opacity: 0.8;
 	li, a {
 		display: inline-block;
 		text-decoration: none;
-		color: #fcfcfc;
+		color: $font-color-offwhite;
 		padding-right: 5px;
 	}
 	nav {
@@ -70,7 +70,7 @@ header {
 
 	li {
 		font-size: 40px;
-		color: #fcfcfc;
+		color: $font-color-offwhite;
 		display: block;
 
 		.fa {
@@ -153,17 +153,25 @@ header {
 		width: $sidebar-width - $sidebar-tabs-width;
 		height: 100%;
 		padding: 10px 40px 20px 40px;
+
+		#title {
+
+		}
+
+		#body {
+			color: $font-color-offwhite;
+		}
 	}
 
 	h2 {
-		color: #fcfcfc;
+		color: $font-color-offwhite;
 		text-align: center;
 	}
 
 	table {
 		position: relative;
 		width: 100%;
-		color: #fcfcfc;
+		color: $font-color-offwhite;
 
 		.right {
 			text-align: right;

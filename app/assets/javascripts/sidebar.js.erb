@@ -1,0 +1,85 @@
+window.activeCountry = 'United States';
+
+function changeSelectedTab(tab) {
+	if (tab.hasClass('countries')) {
+		updateCountriesTab();				
+	} else if (tab.hasClass('country')) {
+		updateCountryTab();		
+	} else if (tab.hasClass('stocks')) {
+		updateStocksTab();				
+	} else if (tab.hasClass('chatter')) {
+		updateChatterTab();				
+	} else if (tab.hasClass('user')) {
+		updateUserTab();				
+	}
+}
+
+function updateCountriesTab(){
+	var title = 'CountriesTab';
+	var body = 'CountriesTab Body';
+
+	$('#active-tab #title').html(title);
+	$('#active-tab #body').html(body);
+}
+
+function updateCountryTab(){
+	var countryName = window.activeCountry
+
+	$.ajax({
+	  type: 'GET',
+	  dataType: 'json',
+	  url: '/maps/countries',
+	  success: function(json){
+	  	var jsonObj = _.find(json.features, function(feature){
+	  	  return feature.properties.name == countryName;
+	  	});
+
+	  	var p = jsonObj.properties;
+
+	  	var title = countryName;
+	  	var table = $('<table></table>');
+
+	  	var dailyChange = ((p.dailyChange - 1)).toFixed(2).toString() + '%';
+
+	  	table.append($('<tr></tr>').append($('<td>Daily Change</td>')).append($('<td></td>').html(dailyChange)).addClass('daily-change'));
+	  	table.append($('<tr></tr>').append($('<td>Last Update</td>')).append($('<td></td>').html(p.lastTradeTime)).addClass('last-update'));
+	  	table.append($('<tr></tr>').append($('<td>Last Price</td>')).append($('<td></td>').html(p.price)).addClass('last-price'));
+	  	table.append($('<tr></tr>').append($('<td>Fund Name</td>')).append($('<td></td>').html(p.symbol)).addClass('fund-name'));
+	  	table.append($('<tr></tr>').append($('<td>Volume</td>')).append($('<td></td>').html(p.volume)).addClass('volume'));
+	  	table.append($('<tr></tr>').append($('<td>Year High</td>')).append($('<td></td>').html(p.yearHigh)).addClass('year-high'));
+	  	table.append($('<tr></tr>').append($('<td>Year Low</td>')).append($('<td></td>').html(p.yearLow)).addClass('year-low'));
+	  	table.append($('<tr></tr>').append($('<td>Daily High</td>')).append($('<td></td>').html(p.dayHigh)).addClass('daily-high'));
+	  	table.append($('<tr></tr>').append($('<td>Daily Low</td>')).append($('<td></td>').html(p.dayLow)).addClass('daily-low'));
+
+	  	console.log(jsonObj);
+
+	  	$('#active-tab #title').html(title);
+	  	$('#active-tab #body').html(table);
+	  }
+	});
+}
+
+function updateStocksTab(){
+	var title = 'StocksTab';
+	var body = 'StocksTab Body';
+
+	$('#active-tab #title').html(title);
+	$('#active-tab #body').html(body);
+}
+
+function updateChatterTab(){
+	var title = 'ChatterTab';
+	var body = 'ChatterTab Body';
+
+	$('#active-tab #title').html(title);
+	$('#active-tab #body').html(body);
+}
+
+function updateUserTab(){
+	var title = 'UserTab';
+	var body = 'UserTab Body';
+
+	$('#active-tab #title').html(title);
+	$('#active-tab #body').html(body);
+}
+

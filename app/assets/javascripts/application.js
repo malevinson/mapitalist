@@ -11,4 +11,5 @@
 // about supported directives.
 //
 //= require utils
+//= require sidebar
 //= require app

@@ -130,6 +130,7 @@ function updateGeoJSONData(){
 			country.yearLow = result.YearLow;
 			country.dayHigh = result.DaysHigh;
 			country.dayLow = result.DaysLow;
+			country.lastPrice = price;
 
 			countries.push(country);
 		});

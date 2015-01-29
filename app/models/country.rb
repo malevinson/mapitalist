@@ -29,7 +29,8 @@ class Country < ActiveRecord::Base
 						yearHigh: countryParams[:yearHigh],
 						yearLow: countryParams[:yearLow],
 						dayHigh: countryParams[:dayHigh],
-						dayLow: countryParams[:dayLow]
+						dayLow: countryParams[:dayLow],
+						price: countryParams[:price]
 					}, 
 				geometry: 
 					{ type: country.poly_type, coordinates: eval(country.coordinates) }
