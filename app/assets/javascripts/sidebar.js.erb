@@ -90,11 +90,11 @@ function updateCountryTab(section){
 }
 
 function updateStocksTab(section){
-	var title = 'StocksTab';
-	var body = 'StocksTab Body';
+	var title = 'My Stocks';
+	var body = 'Sign in to track stocks in real time';
 
-	$('#active-tab #title').html(title);
-	$('#active-tab #body').html(body);
+	$('.title', section).html(title);
+	$('.body', section).html(body);
 }
 
 function updateChatterTab(section){

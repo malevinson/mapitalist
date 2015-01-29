@@ -1,5 +1,6 @@
 <header>
-	<a class="logo" href="/">Mapitalist</a>
+	<!-- <a class="logo" href="/"></a> -->
+	<%= link_to "Mapitalist", root_path, class: "logo", data: { no_turbolink: true } %>
 	<nav>
 		<!-- buttons change if logged in -->
 		<%if user_signed_in? %>
