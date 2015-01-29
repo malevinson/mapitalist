@@ -79,7 +79,7 @@ function updateGeoJSONData(){
 				 }
 				});
 			} else {
-				console.log("Skipping Post", "(Bad response from Yahoo or the markets aren't open)");
+				console.log("Skipping Post", "(Bad response from Yahoo)");
 			}
 
 		 },
@@ -112,27 +112,27 @@ function updateGeoJSONData(){
 			}
 
 			// uncomment for demo mode
-			dailyChange = randomIntFromInterval(80,120) / 100;
+			// dailyChange = randomIntFromInterval(80,120);
 
 			min = dailyChange < min ? dailyChange : min;
 			max = dailyChange > max ? dailyChange : max;
 
-			var country = {};
-			country.visible = true;
-			country.volume = result.Volume;
-			country.name = countryName;
-			country.dailyChange = dailyChange;
-			country.lastTradeDate = result.LastTradeDate;
-			country.lastTradeTime = result.LastTradeTime;
-			country.symbol = result.Symbol;
-
-			country.fullName = result.Name;
-			country.yearHigh = result.YearHigh;
-			country.yearLow = result.YearLow;
-			country.dayHigh = result.DaysHigh;
-			country.dayLow = result.DaysLow;
-			country.lastPrice = price;
-
+			var country = {
+				visible: true,
+				volume: result.Volume,
+				name: countryName,
+				dailyChange: dailyChange,
+				lastTradeDate: result.LastTradeDate,
+				lastTradeTime: result.LastTradeTime,
+				symbol: result.Symbol,
+				fullName: result.Name,
+				yearHigh: result.YearHigh,
+				yearLow: result.YearLow,
+				dayHigh: result.DaysHigh,
+				dayLow: result.DaysLow,
+				lastPrice: price
+			};
+			
 			countries.push(country);
 		});
 			

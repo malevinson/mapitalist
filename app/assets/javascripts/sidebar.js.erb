@@ -15,7 +15,6 @@ function changeSelectedTab(tab) {
 }
 
 function updateCountriesTab(){
-	console.log("k");
 	var title = 'All Countries';
 	
 	var table = $('<table></table>').attr('id', 'countryIndexTable');
@@ -47,7 +46,7 @@ function updateCountriesTab(){
 
 function updateCountryTab(){
 	
-	var countryName = window.activeCountry
+	var countryName = window.activeCountry || 'United States'
 
 	var country = null;
 
