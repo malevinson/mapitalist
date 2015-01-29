@@ -1,10 +1,10 @@
 class StocksController < ApplicationController
   def index
-  	if user_signed_in? && params[:user_id].to_i == current_user.id
-	  	current_user.stocks
-	  	render json: current_user.stocks
+  	if user_signed_in?
+  		@watched_stocks = current_user.stocks
+  		render :index, layout: false
 	  else
-	  	render json: {error: "invalid request"}
+	  	render text: "Sign in to track stocks in real time"
 	  end
   end
 

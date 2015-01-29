@@ -8,9 +8,8 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: {registrations: 'users/registrations'}
   
-  resources :users, only: [:index] do
-    resources :stocks, only: [:index, :create, :destroy]
-  end
+  resources :users, only: [:index]
+  resources :stocks, only: [:index, :create, :destroy]
 
   root 'home#show'
   

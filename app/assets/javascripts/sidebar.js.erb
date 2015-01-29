@@ -90,11 +90,19 @@ function updateCountryTab(section){
 }
 
 function updateStocksTab(section){
-	var title = 'My Stocks';
-	var body = 'Sign in to track stocks in real time';
+	$('.title', section).html('My Stocks');
+	
+	$.ajax({
+		url: '/stocks',
+		type: 'GET',
+		dataType: 'html',
+		success: function(response){
+			$('.body', section).html(response);
+		},
+		error: function(response){
 
-	$('.title', section).html(title);
-	$('.body', section).html(body);
+		}
+	})
 }
 
 function updateChatterTab(section){
