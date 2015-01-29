@@ -2,15 +2,18 @@
 
 #tabs {
 	position: absolute;
-	top: $header-height;
+	top: 0;
 	width: $sidebar-tabs-width;
+	height: 100%;
 	z-index: 2;
 
 	display: inline-block;
 	margin: 0;
 	list-style: none;
 	padding: 0;
+	padding-top: $header-height;
 	background-color: $tab-bg-color;
+	@include noselect;
 
 	li {
 		font-size: 40px;
@@ -31,53 +34,33 @@
 		}
 
 		&.tab.countries {
-			$country-fg-color: #2780EF;
-			color: $country-fg-color;
+			color: $countries-fg-color;
 			background-color: $tab-bg-color;
-			&.selected, &:hover {
-				color: $tab-bg-color;
-				background-color: $country-fg-color;
-			}
+			@include invert($countries-fg-color, $tab-bg-color);
 		}
 		
 		&.tab.country {
-			$country-fg-color: #FD9326;
 			color: $country-fg-color;
 			background-color: $tab-bg-color;
-			&.selected, &:hover {
-				color: $tab-bg-color;
-				background-color: $country-fg-color;
-			}
+			@include invert($country-fg-color, $tab-bg-color);
 		}
 
 		&.tab.chatter {
-			$chatter-fg-color: #dddddd;
 			color: $chatter-fg-color;
 			background-color: $tab-bg-color;
-			&.selected, &:hover {
-				color: $tab-bg-color;
-				background-color: $chatter-fg-color;
-			}
+			@include invert($chatter-fg-color, $tab-bg-color);
 		}
 
 		&.tab.stocks {
-			$stocks-fg-color: #5EBF60;
 			color: $stocks-fg-color;
 			background-color: $tab-bg-color;
-			&.selected, &:hover {
-				color: $tab-bg-color;
-				background-color: $stocks-fg-color;
-			}
+			@include invert($stocks-fg-color, $tab-bg-color);
 		}
 
 		&.tab.user {
-			$user-fg-color: #FB2A3C;
 			color: $user-fg-color;
 			background-color: $tab-bg-color;
-			&.selected, &:hover {
-				color: $tab-bg-color;
-				background-color: $user-fg-color;
-			}
+			@include invert($user-fg-color, $tab-bg-color);
 		}
 
 	}
@@ -89,7 +72,7 @@
 	width: $sidebar-width;
 	height: 100%;
 	background: #333;
-	overflow: hidden;
+	// overflow: hidden;
 	padding: 0;
 	background-color: rgba(20,20,20,0.9);
 	margin-left: -500px;
@@ -119,8 +102,8 @@
 		float: right;
 		width: $sidebar-width - $sidebar-tabs-width;
 		height: 100%;
-		padding: 10px 40px (40px + $header-height) 40px;
-		overflow-y: auto;
+		padding: 10px 50px (40px + $header-height) 50px;
+		overflow: auto;
 
 		#title {
 
