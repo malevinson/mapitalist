@@ -121,8 +121,6 @@ function queryYahooCountryStocks(encodedURI) {
 				color: numToColorGradient(parseFloat(result.ChangeinPercent))
 			};
 
-
-			
 			countries.push(country);
 		});
 

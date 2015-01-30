@@ -20,8 +20,8 @@ class StocksController < ApplicationController
   end
 
   def destroy
-  	new_stock = current_user.stocks.new(params)
-  	if new_stock.destroy
+  	stock = current_user.stocks.find_by(symbol: params[:symbol])
+  	if stock.destroy
   		render json: current_user.stocks
   	end
   end

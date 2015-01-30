@@ -13,8 +13,8 @@
 	<!-- list stocks -->
 	<table>
 		<% @ws.each do |stock| %>
-			<tr>
-				<td class="key"><%= stock.symbol %></td>
+			<tr class="stock">
+				<td class="key symbol"><%= stock.symbol %></td>
 				<td class="price"><%= stock.price %></td>
 			</tr>
 		<% end %>
@@ -22,6 +22,23 @@
 <% end %>
 
 <script type="text/javascript">
+
+	$(".stock").on("click", function(){
+		var symbol = $('.symbol', this).html();
+		$.ajax({
+			url: '/stocks/' + symbol,
+			type: 'DELETE',
+			data: {},
+			dataType: 'json',
+			success: function(response) {
+				console.log("deleted " + symbol);
+				updateActiveTab();
+			},
+			error: function(response) {
+				console.log("error deleting " + symbol);
+			}
+		});
+	});
 
 	function addSymbolToWatchedStocks(stock) {
 		$.ajax({

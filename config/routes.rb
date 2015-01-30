@@ -13,7 +13,9 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {registrations: 'users/registrations'}
   
   resources :users, only: [:index]
-  resources :stocks, only: [:index, :create, :destroy]
+  resources :stocks, only: [:index, :create]
+
+  delete 'stocks/:symbol' => 'stocks#destroy'
 
   root 'home#show'
   

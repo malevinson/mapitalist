@@ -9,8 +9,6 @@ function numToColorGradient(dailyChangeFloat){
 
 	var change = Math.abs(dailyChangeFloat);
 
-	console.log("change", change);
-
 	if (change > 10) {
 		return colorArray[4]
 	}	else if ( change > 5 ) {
