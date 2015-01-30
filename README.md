@@ -21,3 +21,6 @@
 - Run `rails s`
 - Navigate to your page (e.g. localhost:300)
 - Enjoy!
+
+## ERD:
+![](erd.png)
