@@ -12,8 +12,8 @@ class StocksController < ApplicationController
   end
 
   def create
-  	new_stock = current_user.stocks.find_or_initialize_by(symbol: params[:symbol])
-    new_stock.price = params[:price]
+  	new_stock = current_user.stocks.find_or_initialize_by(symbol: params[:stock][:symbol])
+    new_stock.price = params[:stock][:price]
   	if new_stock.save
   		render json: current_user.stocks
   	end
