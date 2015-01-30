@@ -78,8 +78,8 @@ function queryYahooCountryStocks(encodedURI) {
 	function transformResponse(response){
 		var results = response.query.results.quote;
 
-		var min = Number.POSITIVE_INFINITY;
-		var max = Number.NEGATIVE_INFINITY;
+		// var min = Number.POSITIVE_INFINITY;
+		// var max = Number.NEGATIVE_INFINITY;
 
 		var countries = [];
 			
@@ -100,8 +100,8 @@ function queryYahooCountryStocks(encodedURI) {
 			// uncomment for demo mode
 			// dailyChange = randomIntFromInterval(80,120);
 
-			min = dailyChange < min ? dailyChange : min;
-			max = dailyChange > max ? dailyChange : max;
+			// min = dailyChange < min ? dailyChange : min;
+			// max = dailyChange > max ? dailyChange : max;
 
 			var country = {
 				visible: true,
@@ -117,20 +117,13 @@ function queryYahooCountryStocks(encodedURI) {
 				dayHigh: result.DaysHigh,
 				dayLow: result.DaysLow,
 				lastPrice: price,
-				changeInPercent: result.ChangeinPercent
+				changeInPercent: result.ChangeinPercent,
+				color: numToColorGradient(parseFloat(result.ChangeinPercent))
 			};
+
+
 			
 			countries.push(country);
-		});
-			
-		var b = 1, a = 0;
-
-		_.each(countries, function(country){
-			var dailyChange = (100 + parseFloat(country.changeInPercent))/100;
-			// console.log(country.name, country.changeInPercent, dailyChange);
-			var alpha = ((b - a) * dailyChange - min)/(max - min) + a;
-			country.alpha = alpha.toString();
-			country.color = numToColorGradient(dailyChange, alpha);
 		});
 
 		return countries;

@@ -1,24 +1,28 @@
-// Accepts a float between -1 and 1
-// and a dailyChange value (neg or pos)
+// Accepts a float between -infinity and infinity
 // returns a color from red to green
-function numToColorGradient(dailyChange, num){
+function numToColorGradient(dailyChangeFloat){
 	// lighter to darker
 	var reds = ['#FFBFBF', '#FF8080', '#FF4040', '#FF0000', '#BF0000'];
 	var greens = ['#8FBF8F', '#60BF60', '#30BF30', '#00BF00', '#008000'];
 
-	var color;
+	colorArray = dailyChangeFloat < 1 ? reds : greens;
 
-	if (dailyChange < 1) {
-		// red
-		var i = reds.length - 1 - Math.round(Math.abs(num) * (reds.length - 1));
-		color = reds[i];
+	var change = Math.abs(dailyChangeFloat);
+
+	console.log("change", change);
+
+	if (change > 10) {
+		return colorArray[4]
+	}	else if ( change > 5 ) {
+		return colorArray[3]
+	} else if (change > 3 ) {
+		return colorArray[2]
+	} else if (change > 1 ) {
+		return colorArray[1]
 	} else {
-		// green
-		var i = Math.round(num * (greens.length - 1));
-		color = greens[i];
+		return colorArray[0]
 	}
 
-	return color
 }
 
 function randomIntFromInterval(min,max)
