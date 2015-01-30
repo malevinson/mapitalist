@@ -47,7 +47,7 @@ var lookup = {
 	"EFNL" : "Finland"
 };
 
-function queryYahoo(encodedURI) {
+function queryYahooCountryStocks(encodedURI) {
 	$.ajax(
 		{url: encodedURI,
 		success: function(response){
@@ -155,7 +155,7 @@ function updateGeoJSONData() {
 	encodedURI = buildQuery(keys);
 
 	// call to Yahoo API requesting stock information for lookup list
-	queryYahoo(encodedURI);
+	queryYahooCountryStocks(encodedURI);
 }
 
 updateGeoJSONData();

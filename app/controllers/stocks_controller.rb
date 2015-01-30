@@ -23,6 +23,6 @@ class StocksController < ApplicationController
   end
 
   def stock_params
-  	params.require(:stock).permit(:symbol)
+  	params.require(:data).permit(:symbol)
   end
 end

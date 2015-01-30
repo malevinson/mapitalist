@@ -19,12 +19,47 @@
 <% end %>
 
 <script type="text/javascript">
+
+	function addSymbolToWatchedStocks(symbol) {
+		$.ajax({
+			type: 'POST',
+			url: '/stocks',
+			data: {data: {symbol: symbol}},
+			dataType: 'json',
+			success: function(response) {
+				// console.log("success", response);
+				changeSelectedTab($('#tabs .selected'));
+			},
+			error: function() {
+
+			}
+		});
+	}
+
 	$('.new_stock').on('submit', function(event){
 		event.preventDefault();
-		// check that the submitted symbol exists
-		// if it doesn't, tell the user
-		// if it doesn't, post it to our db and update the view (with info from Yahoo)
+		
 		var symbol = $('input[name="stock[symbol]"]').val();
 		console.log(symbol);
+		var url = buildQuery([symbol]);
+		console.log(url);
+		$.ajax({
+			type: 'GET',
+			url: url,
+			dataType: 'json',
+			success: function(response) {
+				var stock = response.query.results.quote;
+
+				// make sure what we got back is a stock
+				if (stock.Ask != null) {
+					// post it to our db and update the view (with info from Yahoo)
+					addSymbolToWatchedStocks(symbol);
+				}
+				console.log("success", stock);
+			},
+			error: function() {
+				console.log("error");
+			}
+		});
 	});
 </script>
