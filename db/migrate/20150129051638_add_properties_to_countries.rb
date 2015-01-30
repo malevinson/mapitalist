@@ -14,5 +14,6 @@ class AddPropertiesToCountries < ActiveRecord::Migration
     add_column :countries, :day_high, :string, default: ""
     add_column :countries, :day_low, :string, default: ""
     add_column :countries, :last_price, :string, default: ""
+    add_column :countries, :change_in_percent, :string, default: ""
   end
 end

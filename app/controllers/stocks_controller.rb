@@ -2,7 +2,10 @@ class StocksController < ApplicationController
   def index
   	if user_signed_in?
   		@watched_stocks = current_user.stocks
-  		render :index, layout: false
+      respond_to do |format|
+        format.html { render :index, layout: false}
+        format.json { render :json => @watched_stocks }
+  		end
 	  else
 	  	render text: "Sign in to track stocks in real time"
 	  end
@@ -23,6 +26,6 @@ class StocksController < ApplicationController
   end
 
   def stock_params
-  	params.require(:data).permit(:symbol)
+  	params.require(:stock).permit(:symbol, :price)
   end
 end

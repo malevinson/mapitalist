@@ -32,7 +32,7 @@ $(".tab").on("click", function(){
 		// slide on screen or change tabs
 		$(".selected").removeClass("selected");
 		$(this).addClass("selected");
-		changeSelectedTab($('#tabs .selected'));
+		updateActiveTab();
 		$("#sidebar-left").animate({"margin-left": '0'})
 	}
 });

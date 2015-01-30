@@ -1,34 +1,38 @@
 <%= form_for current_user.stocks.build do |f| %>
-	<%= f.search_field :symbol, placeholder: "AAPL" %>
+	<%= f.search_field :symbol, placeholder: "S&P 500" %>
 	<%= f.submit "Search" %>
 <% end %>
 
 <!-- exclude the blank stock we're building in the form -->
 <% @ws = @watched_stocks[0...-1] %>
 
-<% if @ws_length == 0 %>
+<% if @ws.length <= 0 %>
 	<!-- no stocks -->
 	<p>You aren't tracking any stocks yet.</p>
 <% else %>
 	<!-- list stocks -->
-	<ul>
+	<table>
 		<% @ws.each do |stock| %>
-			<li><%= stock.symbol %></li>
+			<tr>
+				<td class="key"><%= stock.symbol %></td>
+				<td class="price"><%= stock.price %></td>
+			</tr>
 		<% end %>
-	</ul>
+	</table>
 <% end %>
 
 <script type="text/javascript">
 
-	function addSymbolToWatchedStocks(symbol) {
+	function addSymbolToWatchedStocks(stock) {
 		$.ajax({
 			type: 'POST',
 			url: '/stocks',
-			data: {data: {symbol: symbol}},
+			data: {stock: {symbol: stock.Symbol,
+										 price: stock.Ask}},
 			dataType: 'json',
 			success: function(response) {
 				// console.log("success", response);
-				changeSelectedTab($('#tabs .selected'));
+				updateActiveTab();
 			},
 			error: function() {
 
@@ -53,7 +57,7 @@
 				// make sure what we got back is a stock
 				if (stock.Ask != null) {
 					// post it to our db and update the view (with info from Yahoo)
-					addSymbolToWatchedStocks(symbol);
+					addSymbolToWatchedStocks(stock);
 				}
 				console.log("success", stock);
 			},

@@ -1,7 +1,8 @@
 window.activeCountry = 'United States';
 
-function changeSelectedTab(tab) {
+function updateActiveTab() {
 	$('section').hide();
+	var tab = $('#tabs .selected');
 	var section = $('section').eq(tab.index());
 
 	if (tab.hasClass('countries')) {
@@ -22,71 +23,52 @@ function changeSelectedTab(tab) {
 function updateCountriesTab(section){
 	$('.title', section).html('All Countries');
 
-	var table = $('<table></table>').attr('id', 'countryIndexTable');
-
-	map.data.forEach(function(feature) {
-	  var featureCountryName = feature.getProperty("name");
-	  var dailyChangeFloat = ((feature.getProperty("dailyChange") - 1)).toFixed(2);
-	  var dailyChange = dailyChangeFloat.toString() + '%';
-
-	  table.append($('<tr></tr>')
-	  	.addClass("country")
-	  	.addClass(featureCountryName)
-	  	.append($('<td></td>')
-	  		.html(featureCountryName)
-	  		.addClass('key'))
-	  	.append($('<td></td>')
-	  		.html(feature.getProperty("symbol"))
-	  		.addClass('symbol'))
-	  	.append($('<td></td>')
-	  		.addClass('right')
-	  		.css('color', feature.getProperty("color"))
-	  		.html(dailyChange))
-	  	.addClass('daily-change'));
+	$.ajax({
+		url: '/all_countries/index',
+		type: 'GET',
+		dataType: 'html',
+		success: function(response){
+			$('.body', section).html(response);
+		},
+		error: function(response){
+		}
 	});
-
-	$('.body', section).html(table);
 }
 
 function updateCountryTab(section){
 	var countryName = window.activeCountry;
 
+	$('.title', section).html(countryName);
+
 	var country = null;
 
+	// find the feature on the map with that name
 	map.data.forEach(function(feature) {
-	  var featureCountryName = feature.getProperty("name");
-	  if (featureCountryName == countryName) {
+	  if (feature.getProperty("name") == countryName) {
 	  	country = feature;
 	  	return;
 	  }
 	});
 
-	var table = $('<table></table>').attr('id', 'countryDataTable');
+	// pass all of that feature's properties to an object
+	var properties = {};
+	country.forEachProperty(function(value, key){
+		properties[key] = value;
+	});
 
-	var dailyChangeFloat = ((country.getProperty("dailyChange") - 1)).toFixed(2);
-	var dailyChange = dailyChangeFloat.toString() + '%';
-
-	table.append($('<tr></tr>').append($('<td>Daily Change</td>').addClass('key'))
-		.append($('<td></td>').html(dailyChange).css('color', country.getProperty("color"))).addClass('daily-change'));
-	table.append($('<tr></tr>').append($('<td>Last Update</td>').addClass('key'))
-		.append($('<td></td>').html(country.getProperty("lastTradeTime"))).addClass('last-update'));
-	table.append($('<tr></tr>').append($('<td>Last Price</td>').addClass('key'))
-		.append($('<td></td>').html(country.getProperty("price"))).addClass('last-price'));
-	table.append($('<tr></tr>').append($('<td>Fund Name</td>').addClass('key'))
-		.append($('<td></td>').html(country.getProperty("symbol"))).addClass('fund-name'));
-	table.append($('<tr></tr>').append($('<td>Volume</td>').addClass('key'))
-		.append($('<td></td>').html(country.getProperty("volume"))).addClass('volume'));
-	table.append($('<tr></tr>').append($('<td>Year High</td>').addClass('key'))
-		.append($('<td></td>').html(country.getProperty("yearHigh"))).addClass('year-high'));
-	table.append($('<tr></tr>').append($('<td>Year Low</td>').addClass('key'))
-		.append($('<td></td>').html(country.getProperty("yearLow"))).addClass('year-low'));
-	table.append($('<tr></tr>').append($('<td>Daily High</td>').addClass('key'))
-		.append($('<td></td>').html(country.getProperty("dayHigh"))).addClass('daily-high'));
-	table.append($('<tr></tr>').append($('<td>Daily Low</td>').addClass('key'))
-		.append($('<td></td>').html(country.getProperty("dayLow"))).addClass('daily-low'));
-
-	$('.title', section).html(countryName);
-	$('.body', section).html(table);
+	$.ajax({
+		url: '/all_countries/show',
+		type: 'POST',
+		dataType: 'html',
+		data: {properties: properties},
+		success: function(response) {
+			console.log("success");
+			$('.body', section).html(response);
+		},
+		error: function(response) {
+			console.log("error");
+		}
+	});
 }
 
 function updateStocksTab(section){

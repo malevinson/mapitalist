@@ -93,8 +93,7 @@ function queryYahooCountryStocks(encodedURI) {
 			var dailyChange = (parseFloat(price) / parseFloat(open)).toString();
 
 			if ( isNaN(ask) || isNaN(bid) || isNaN(price) || isNaN(open) || isNaN(dailyChange) ) {
-				// Bad response from Yahoo or the markets aren't open 
-				// (skip this country)
+				// Bad response from Yahoo (skip this country)
 				return false
 			}
 
@@ -117,7 +116,8 @@ function queryYahooCountryStocks(encodedURI) {
 				yearLow: result.YearLow,
 				dayHigh: result.DaysHigh,
 				dayLow: result.DaysLow,
-				lastPrice: price
+				lastPrice: price,
+				changeInPercent: result.ChangeinPercent
 			};
 			
 			countries.push(country);
@@ -126,7 +126,8 @@ function queryYahooCountryStocks(encodedURI) {
 		var b = 1, a = 0;
 
 		_.each(countries, function(country){
-			var dailyChange = parseFloat(country.dailyChange);
+			var dailyChange = (100 + parseFloat(country.changeInPercent))/100;
+			// console.log(country.name, country.changeInPercent, dailyChange);
 			var alpha = ((b - a) * dailyChange - min)/(max - min) + a;
 			country.alpha = alpha.toString();
 			country.color = numToColorGradient(dailyChange, alpha);

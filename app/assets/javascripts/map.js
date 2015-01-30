@@ -31,7 +31,7 @@ function initialize() {
     window.activeCountry = name;
     $('.tab').removeClass('selected');
     $('#tabs .country').addClass('selected');
-    changeSelectedTab($('#tabs .selected'));
+    updateActiveTab();
 
     $("#sidebar-left").animate({"margin-left": '0'});
   });  
@@ -70,6 +70,7 @@ function updateMapData(){
     });
 
     console.log("Updated map to match server data");
+    updateActiveTab();
 
     },
     failure: function(){

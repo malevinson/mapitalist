@@ -1,0 +1,59 @@
+<!-- 
+visible
+volume
+name
+dailyChange
+lastTradeDate
+lastTradeTime
+symbol
+fullName
+yearHigh
+yearLow
+dayHigh
+dayLow
+lastPrice
+changeInPercent
+alpha
+color
+-->
+
+<table id="countryDataTable">
+<tbody>
+	<tr class="daily-change">
+		<td class="key">Daily Change</td>
+		<td style="color: <%= @properties[:color] %>"><%= @properties[:changeInPercent] %></td>
+	</tr>
+	<tr class="last-update">
+		<td class="key">Last Update</td>
+		<td><%= @properties[:lastTradeTime]%></td>
+	</tr>
+		<tr class="last-price">
+		<td class="key">Last Price</td>
+		<td><%= @properties[:price]%></td>
+	</tr>
+		<tr class="fund-name">
+		<td class="key">Fund Name</td>
+		<td><%= @properties[:symbol]%></td>
+	</tr>
+		<tr class="volume">
+		<td class="key">Volume</td>
+		<td><%= @properties[:volume]%></td>
+	</tr>
+		<tr class="year-high">
+		<td class="key">Year High</td>
+		<td><%= @properties[:yearHigh]%></td>
+	</tr>
+		<tr class="year-low">
+		<td class="key">Year Low</td>
+		<td><%= @properties[:yearLow]%></td>
+	</tr>
+		<tr class="daily-high">
+		<td class="key">Daily High</td>
+		<td><%= @properties[:dayHigh]%></td>
+	</tr>
+	<tr class="daily-low">
+		<td class="key">Daily Low</td>
+		<td><%= @properties[:dayLow]%></td>
+	</tr>
+</tbody>
+</table>

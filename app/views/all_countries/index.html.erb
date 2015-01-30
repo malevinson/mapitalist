@@ -1,0 +1,13 @@
+<div class="body">
+	<table id="countryIndexTable">
+	<tbody>
+	<% @countries.each do |country| %>
+	<tr class="country Austria daily-change">
+			<td class="key"><%= country.name %></td>
+			<td class="symbol"><%= country.symbol %></td>
+			<td class="right" style="color: <%= country.color %>;"><%= country.change_in_percent %></td>
+	</tr>
+	<% end %>
+	</tbody>
+	</table>
+</div>

@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'all_countries/index'
+
+  post 'all_countries/show' => 'all_countries#show'
+
   get 'maps/countries'
 
   get 'home/show'
