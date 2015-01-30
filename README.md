@@ -10,7 +10,14 @@
 
 ## Instructions:
 - Click on a country of interest to see specific details. Use the left side navigation menu for more options. 
-		- Click the globe to see a world summary
-		- Click the globe for country specific detail
-		- Click on the graph ...
-		- Click on the chatter icon to see recent tweets referencing the index used to track that specific country
+- Click the globe to see a world summary
+- Click the globe for country specific detail
+- Click on the graph ...
+- Click on the chatter icon to see recent tweets referencing the index used to track that specific country
+
+## Setup:
+- Run `bundle install`
+- Run `rake db:setup`
+- Run `rails s`
+- Navigate to your page (e.g. localhost:300)
+- Enjoy!
