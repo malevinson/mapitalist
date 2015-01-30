@@ -1,5 +1,5 @@
 <%= form_for current_user.stocks.build do |f| %>
-	<%= f.search_field :symbol, placeholder: "S&P 500" %>
+	<%= f.search_field :symbol, placeholder: "AAPL" %>
 	<%= f.submit "Search" %>
 <% end %>
 
@@ -28,10 +28,10 @@
 			type: 'POST',
 			url: '/stocks',
 			data: {stock: {symbol: stock.Symbol,
-										 price: stock.Ask}},
+										 price: stock.LastTradePriceOnly}},
 			dataType: 'json',
 			success: function(response) {
-				// console.log("success", response);
+				console.log("Updated database with new stock info");
 				updateActiveTab();
 			},
 			error: function() {
@@ -55,11 +55,11 @@
 				var stock = response.query.results.quote;
 
 				// make sure what we got back is a stock
-				if (stock.Ask != null) {
+				if (stock.Currency != null) {
 					// post it to our db and update the view (with info from Yahoo)
 					addSymbolToWatchedStocks(stock);
 				}
-				console.log("success", stock);
+				// console.log("success");
 			},
 			error: function() {
 				console.log("error");

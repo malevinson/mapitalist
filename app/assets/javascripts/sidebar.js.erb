@@ -62,12 +62,41 @@ function updateCountryTab(section){
 		dataType: 'html',
 		data: {properties: properties},
 		success: function(response) {
-			console.log("success");
+			// console.log("success");
 			$('.body', section).html(response);
 		},
 		error: function(response) {
 			console.log("error");
 		}
+	});
+}
+
+function refreshStocks() {
+	$.ajax({
+		url: '/stocks.json',
+		type: 'GET',
+		dataType: 'json',
+		success: function(stocks){
+			console.log("Fetched latest user stock data from our db")
+
+			var symbols = _.pluck(stocks, 'symbol');
+			var queryURL = buildQuery(symbols);
+			$.ajax({
+				url: queryURL,
+				type: 'GET',
+				dataType: 'json',
+				success: function(stocks){
+					console.log("Fetched latest stock prices from Yahoo", stocks);
+					_.each(stocks, function(stock){
+						addSymbolToWatchedStocks(stock);
+					});
+						console.log("Updated our db with latest stock prices");
+				},
+				error: function(){}
+			});
+
+		},
+		error: function(){}
 	});
 }
 
@@ -81,9 +110,7 @@ function updateStocksTab(section){
 		success: function(response){
 			$('.body', section).html(response);
 		},
-		error: function(response){
-
-		}
+		error: function(response){}
 	});
 }
 
