@@ -1,4 +1,4 @@
-# [Mapitalist](www.mapitalist.com):
+# [Mapitalist](http://www.mapitalist.com):
 ## Mapitalist allows you to see how the world stock markets change on a daily basis. Each country is tracked through an index funds or ETF that represents its entire stock market.
 
 ## Technologies:
