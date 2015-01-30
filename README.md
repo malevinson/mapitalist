@@ -19,7 +19,7 @@
 - Run `bundle install`
 - Run `rake db:setup`
 - Run `rails s`
-- Navigate to your page (e.g. localhost:300)
+- Navigate to your page (e.g. localhost:3000)
 - Enjoy!
 
 ## ERD:
