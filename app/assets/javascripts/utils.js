@@ -5,7 +5,7 @@ function numToColorGradient(dailyChangeFloat){
 	var reds = ['#FFBFBF', '#FF8080', '#FF4040', '#FF0000', '#BF0000'];
 	var greens = ['#8FBF8F', '#60BF60', '#30BF30', '#00BF00', '#008000'];
 
-	colorArray = dailyChangeFloat < 1 ? reds : greens;
+	colorArray = dailyChangeFloat < 0 ? reds : greens;
 
 	var change = Math.abs(dailyChangeFloat);
 
